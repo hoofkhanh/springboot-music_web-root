@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{_fragments::head}">
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+       <!-- Sidebar -->
+         <ul th:replace="~{_fragments::sidebar}"></ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+               <nav th:replace="~{_fragments::topbar}"></nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+							<div th:if="${error != null}" class="text-center">
+								<p class="alert alert-danger" th:text="${error}"></p>
+							</div>
+                            <h6 class="m-0 font-weight-bold text-primary">
+								<a th:href="@{/playlists}">Quay về</a>
+							</h6>
+                            
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+							  <form th:action="${param.id} != null ? '/admin/playlists/editPlaylist' : '/admin/playlists/addPlaylist'" method="post" enctype="multipart/form-data">
+								  <button type="submit" id="addTrackToPlaylistButton" style="width: 100%;" class="btn btn-primary" >Xác nhận</button>
+								  <input type="hidden" th:if="${allTrackHaveCheckedInCheckbox != null}" th:value ="${allTrackHaveCheckedInCheckbox}"  name="allTrackHaveCheckedInCheckbox" id="allTrackHaveCheckedInCheckbox">
+								  <input type="hidden" th:if="${allTrackHaveCheckedInCheckbox == null}"  name="allTrackHaveCheckedInCheckbox" id="allTrackHaveCheckedInCheckbox">
+								  <input id="idOfPlaylist" th:if="${param.id != null}" th:value="${param.id}" type="hidden" name="id">
+								  <div class="form-group">
+						            <label for="recipient-name" class="col-form-label">Tên danh sách phát:</label>
+						            <input th:if="${playlist != null}" th:value="${playlist.playlistTitle}" name="playlistTitle" type="text" class="form-control" id="recipient-name" required>
+						            <input th:if="${playlist == null}" name="playlistTitle" type="text" class="form-control" id="recipient-name" required>
+						          </div>
+						          <div class="form-group">
+						            <label for="recipient-name" class="col-form-label">Hình ảnh bài hát:</label>
+						            <img id="imageOfPlaylistDisplay"  th:src="'data:image/jpeg;base64,' + ${imageOfPlaylist}" style="width: 100px; height: 100px; margin-left: 20px;">
+						          	<input th:if="${imageOfPlaylist == null && imageOfPlaylist_Add == null}" name="imageOfPlaylist" type="file" class="form-control" id="imageOfPlaylistFile" accept="image/png, image/gif, image/jpeg" required>
+						          	<input th:if="${imageOfPlaylist_Add != null and imageOfPlaylist == null}" name="imageOfPlaylist" type="file" class="form-control" id="imageOfPlaylistFile" accept="image/png, image/gif, image/jpeg" required>
+						          	<input th:if="${imageOfPlaylist != null}" name="imageOfPlaylist" type="file" class="form-control" id="imageOfPlaylistFile" accept="image/png, image/gif, image/jpeg">
+						          </div>
+						          <div class="form-group">
+						            <label for="recipient-name" class="col-form-label">Riêng tư:</label>
+						            <label>
+										<input value= 1 name="havePrivate" type="radio" class="form-control" th:checked="${havePrivate != null && havePrivate == 1}" > Yes
+									</label>
+									<label style="margin-left: 10px;">
+										<input value= 0 name="havePrivate" type="radio" class="form-control"  th:checked="${havePrivate == null || havePrivate != null && havePrivate == 0}"> No
+									</label>
+						          </div>
+	                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+	                                    <thead>
+	                                        <tr>   
+												<th>Ảnh</th>
+	                                            <th>Tên bài hát</th>
+	                                            <th>Thể loại</th>
+	                                            <th>Người Đăng</th>
+	                                            <th>Nghệ sĩ hợp tác</th>
+	                							<th>Thao tác</th>   
+	                                        </tr>
+	                                    </thead>
+	                                    <tfoot>
+	                                        <tr>
+												<th>Ảnh</th>
+	                                            <th>Tên bài hát</th>
+	                                            <th>Thể loại</th>
+	                                            <th>Người Đăng</th>
+	                                            <th>Nghệ sĩ hợp tác</th>
+	                							<th>Thao tác</th> 
+	                                        </tr>
+	                                    </tfoot>
+	                                    <tbody>
+	                                        <tr th:each="track:${trackList}" th:if="${track.isPrivate == false}">
+												<td style="width: 50px;height: 50px;">
+													<img style="width: 100%;height: 100%;object-fit: cover;" th:src="'data:image/jpeg;base64,' + ${track.image}">
+												</td>
+												<td th:text="${track.trackTitle}"></td>
+												<td th:text="${track.genre.name}"></td>
+												<td th:text="${track.user.artistName}"></td>
+												<td >
+													<span th:each="artist, iterStat : ${track.userList}">
+												        <span th:text="${artist.artistName}"></span>
+												        <span th:if="${!iterStat.last}">, </span>
+												    </span>
+												</td>
+												<td>
+													<a class="detailButton" th:href="@{/tracks/findById(id = ${track.id})}" data-toggle="modal" data-target="#detailModal" data-whatever="@mdo">Chi tiết</a>
+													| <span>Chọn</span> <input class="checkbox" type="checkbox">
+													<input type="hidden" class="hiddenIdOfTrack" th:value="${track.id}">
+												</td>
+											</tr>                                     
+	                                    </tbody>
+	                                </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer th:replace="~{_fragments::footer}"></footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a th:replace="~{_fragments::scrollToTop}"></a>
+
+	<!--Logut modal-->
+    <div th:replace="~{_fragments::logoutModal}"></div>
+    
+	
+	<!-- Detail Modal-->
+    <div class="modal fade bd-example-modal-lg" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Chi tiết bài hát</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form >
+			  <table style="width: 100%;">
+				  <tr>
+					  <td >
+						  <div class="form-group">
+				            <label for="recipient-name" class="col-form-label">Tên bài hát:</label>
+				            <input  type="text" class="form-control" id="trackTitleDetail" readonly required>
+				          </div>
+				          <div class="form-group">
+				            <label for="recipient-name" class="col-form-label">Lượt nghe:</label>
+				            <input type="text" class="form-control" id="numberOfListensDetail" readonly required>
+				          </div>
+				          <div class="form-group">
+				            <label for="recipient-name" class="col-form-label">Ngày đăng:</label>
+				            <input type="date" class="form-control" id="releaseDateDetail" readonly required>
+				          </div>
+				          <div class="form-group">
+				            <label for="recipient-name" class="col-form-label">Người đăng:</label>
+				            <input type="text" class="form-control" id="userDetail" readonly required>
+				          </div>
+					  </td>
+					  <td style="padding-left: 20px;">
+						  <div class="form-group">
+				            <label for="recipient-name" class="col-form-label">Thể loại:</label>
+				            <select id="genreDetail" class="form-control" disabled required>
+								<option th:value="null">--CHỌN--</option>
+								<option th:each="genre:${genreList}" th:text="${genre.name}" th:value="${genre.id}" ></option>
+				            </select>
+				          </div>
+				          <div class="form-group">
+				            <label for="recipient-name" class="col-form-label">Hợp tác:</label>
+				            <input type="text" class="form-control" id="cooperatorDetail" readonly required>
+				          </div>
+				          <div class="form-group">
+				            <label for="recipient-name" class="col-form-label">Riêng tư:</label>
+				            <label>
+								<input value= 1 type="radio" class="form-control" id="isPrivateDetailYes" disabled> Yes
+							</label>
+							<label style="margin-left: 10px;">
+								<input value= 0 type="radio" class="form-control" id="isPrivateDetailNo" disabled> No
+							</label>
+				          </div>
+					  </td>
+				  </tr>
+				  <tr>
+					  <td colspan="2">
+						  <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tắt</button>
+					      </div>
+					  </td>
+				  </tr>
+			  </table>
+	        </form>
+	      </div>
+	      
+	    </div>
+	  </div>
+	</div>
+
+	<!--Js-->
+    <div th:replace="~{_fragments::js}">
+	</div>
+
+    <!-- Page level plugins -->
+    <script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+    <!-- Page level custom scripts -->
+    <script th:src="@{/js/demo/datatables-demo.js}"></script>
+	<script th:src="@{/js/track.js}"></script>
+	<script th:src="@{/js/playlist-add-edit.js}"></script>
+</body>
+
+</html>

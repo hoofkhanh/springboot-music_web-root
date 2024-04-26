@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{_fragments::head}">
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+       <!-- Sidebar -->
+         <ul th:replace="~{_fragments::sidebar}"></ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+               <nav th:replace="~{_fragments::topbar}"></nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+						<a  th:href="@{/masterPlaylists/addMasterPlaylistPage}" class="btn btn-primary" >Thêm siêu danh sách phát</a>
+
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Các siêu danh sách phát</h6>
+                           
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>   
+											<th>Id</th>
+                                            <th>Tên siêu danh sách phát</th>
+                                            <th>Người tạo</th>
+                							<th>Thao tác</th>   
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+											<th>Id</th>
+											<th>Tên siêu danh sách phát</th>
+                                            <th>Người tạo</th>
+                							<th>Thao tác</th>   
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr th:each="masterPlaylist : ${masterPlaylistList}">		
+											<td th:text="${masterPlaylist.id}"></td>						
+											<td th:text="${masterPlaylist.titleOfMasterPlaylist}"></td>
+											<td th:text="${masterPlaylist.user.artistName}"></td>
+											<td >
+												<a th:href="@{/masterPlaylists/editMasterPlaylistPage(id = ${masterPlaylist.id})}">Chỉnh sửa</a> | 
+												<a class="detailButton" th:href="@{/masterPlaylists/findById(id = ${masterPlaylist.id})}" data-toggle="modal" data-target="#detailModal" data-whatever="@mdo">Chi tiết</a> |
+												<a th:href="@{/masterPlaylists/delete(id = ${masterPlaylist.id})}">Xóa</a>
+											</td>
+										</tr>                                     
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer th:replace="~{_fragments::footer}"></footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a th:replace="~{_fragments::scrollToTop}"></a>
+
+	<!--Logut modal-->
+    <div th:replace="~{_fragments::logoutModal}"></div>
+
+	<!--Js-->
+    <div th:replace="~{_fragments::js}">
+	</div>
+	
+	<!-- Detail Modal-->
+    <div class="modal fade bd-example-modal-lg" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Chi tiết</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form >
+				  <div class="form-group">
+				     <label for="recipient-name" class="col-form-label">Tên:</label>
+				     <input  type="text" class="form-control" id="masterPlaylistTitleDetail" readonly>
+				 </div>
+				 <div class="form-group">
+				    <label for="recipient-name" class="col-form-label">Các danh sách phát:</label>
+				    <textarea style="height: 200px;" class="form-control" id="masterPlaylistListDetail" disabled></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Tắt</button>
+				</div>
+	        </form>
+	      </div>
+	      
+	    </div>
+	  </div>
+	</div>
+
+    <!-- Page level plugins -->
+    <script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+    <!-- Page level custom scripts -->
+    <script th:src="@{/js/demo/datatables-demo.js}"></script>
+    <script th:src="@{/js/master-playlist.js}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,332 @@
+/* background of playlist */
+.background-playlist {
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-top: 80px;
+  height: 240px;
+  position: relative;
+}
+
+
+.background-playlist .avatar{
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  object-fit: cover;
+  transition: transform 0.3s;
+  filter: none
+}
+
+.background-playlist .avatar:hover {
+  transform: scale(1.03);
+}
+
+.image-info-background-playlist {
+  display: flex;
+  align-items: center;
+}
+
+.info-background-playlist {
+  margin-left: 20px;
+  font-weight: 500;
+}
+
+.info-background-playlist h1 {
+  font-size: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space:nowrap; 
+  max-width: 890px; 
+}
+
+.important-info-background-playlist img {
+  width: 25px;
+  border-radius: 15px;
+}
+
+.important-info-background-playlist {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  gap: 10px;
+}
+
+.important-info-background-playlist a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.important-info-background-playlist a:hover {
+  text-decoration: underline;
+}
+
+/* button in first line of playlist */
+.button-play-saveToLibary {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 30px 20px 30px 20px;
+}
+
+#button-play-in-playlist{
+  padding: 15px 20px;
+  border-radius: 50px;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(241, 18, 18, 0.995);
+  color: rgb(255, 255, 255);
+  transition: transform 0.15s;
+  display: inline-block;
+}
+
+#button-play-in-playlist:hover {
+  transform: scale(1.1);
+  filter: brightness(150%);
+}
+
+#button-play-in-playlist:active{
+  opacity: 0.8;
+  transform: scale(0.95);
+}
+
+#button-save-to-libary-page-of-playlist {
+  font-size: 45px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+  display: inline-block;
+  transition: transform 0.15s;
+}
+
+#button-save-to-libary-page-of-playlist:hover {
+  transform: scale(1.1);
+  filter: brightness(150%);
+}
+
+#button-save-to-libary-page-of-playlist:active{
+  opacity: 0.8;
+  transform: scale(0.95);
+}
+
+/* display music in playlist */
+.display-music-of-playlist {
+  margin: 0 10px;
+}
+
+.th-of-music {
+  padding: 10px 20px;
+  display: flex;
+  font-size: 15px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(182, 171, 171, 0.203);
+}
+
+.title-in-th-of-music {
+  width: 600px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.image-in-th-of-music {
+  width: 40px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.button-play-of-track-in-play-list {
+  color: rgba(255, 255, 255, 0.7);
+  display: none;
+  width: 20px;
+  transition: transform 0.15;
+}
+
+.button-play-of-track-in-play-list i {
+  pointer-events: none;
+}
+
+.button-play-of-track-in-play-list:hover {
+  transform: scale(1.1);
+}
+
+.time{
+  width: 110px;
+  justify-self: flex-end;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.eye{
+  width: 140px;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.track-in-playlist {
+  padding: 10px 20px;
+  display: flex;
+  font-size: 15px;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  transition: background-color 0.15s;
+  border-radius: 10px;
+}
+
+.track-in-playlist:hover {
+  background-color: rgba(46, 43, 43, 0.993);
+}
+
+.track-in-playlist:hover .button-play-of-track-in-play-list {
+  display: block;
+}
+
+.track-in-playlist:hover .index-of-track-in-play-list {
+  display: none;
+}
+
+.track-in-playlist:hover .listens-of-track-artist-in-page-playlist a{
+  opacity: 1;
+}
+
+.track-in-playlist:hover .name-of-artists-in-page-playlist a {
+  color: white;
+}
+
+.index-of-track-in-play-list {
+  color: rgba(255, 255, 255, 0.7);
+  width: 20px;
+}
+
+.time-of-track-artist-in-page-playlist {
+  width: 110px;
+  justify-self: flex-end;
+  text-align:  center ;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.listens-of-track-artist-in-page-playlist {
+  width: 140px;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.listens-of-track-artist-in-page-playlist a {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.info-of-track-artist-in-page-playlist {
+  display: flex;
+  align-items: center;
+  width: 600px;
+}
+
+.name-of-track-artist-in-page-playlist {
+  margin-left: 20px;
+ 
+}
+
+
+#page-of-artist .name-of-track-artist-in-page-playlist, #page-of-play-list .name-of-track-artist-in-page-playlist{
+   width: 500px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#page-of-artist .track-in-playlist .name-of-artists-in-page-playlist, #page-of-play-list .track-in-playlist .name-of-artists-in-page-playlist{
+	width: 500px;
+	text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.name-of-track-in-page-playlist {
+  font-size: 17px;
+  text-decoration: none;
+  color: white;
+}
+
+.name-of-track-in-page-playlist:hover {
+  text-decoration: underline;
+}
+
+.name-of-artists-in-page-playlist a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+}
+
+.name-of-artists-in-page-playlist a:hover {
+  text-decoration: underline;
+}
+
+/* Bài hát và Album khác*/
+.grid-all-playlist-artist-track-margin-top {
+  margin-top: 50px;
+  padding: 10px 20px;
+}
+
+.title-and-see-all h1 a {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.title-and-see-all h1 a:hover{
+  text-decoration: underline;
+}
+
+.title-and-see-all h4 a {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.title-and-see-all h4 a:hover {
+  text-decoration: underline;
+}
+
+.recommend-margin-top {
+  margin-top: 50px;
+}
+
+.recommend {
+  font-size: 24px;
+  padding: 10px 20px;
+}
+
+.image-of-track-artist-in-page-playlist {
+  width: 40px;
+}
+
+.image-of-track-artist-in-page-playlist img{
+  width: 100%;
+  border-radius: 5px;
+}
+
+#button-share-in-playlist {
+  font-size: 45px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+  display: inline-block;
+  transition: transform 0.15s;
+}
+
+#button-share-in-playlist:hover {
+  transform: scale(1.1);
+  filter: brightness(150%);
+}
+
+#button-share-in-playlist:active{
+  opacity: 0.8;
+  transform: scale(0.95);
+}
+
+

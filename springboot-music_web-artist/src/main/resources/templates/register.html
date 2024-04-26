@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng kí</title>
+  <link rel="stylesheet" type="text/css" href="styles/login.css" />
+</head>
+<body>
+  <div class="all-form-login">
+    <h1>Đăng kí</h1>
+    <p th:if="${notification != null}" style="color: yellow; text-align: center; margin-top: 10px;" th:text="${notification}"></p>
+    <table >
+	  <form th:action="@{/register/confirmRegister}" method="post">
+	      <tr>
+	        <td>
+	          <div class="input-div">
+	            <label>Email</label>
+	            <input th:value="${email}" type="email" required id="email" name="email">
+	        
+	          </div>
+	      
+	          <div class="input-div">
+	            <label>Mật khẩu</label>
+	            <input th:value="${password}" type="password" required autocomplete="on" name="password">
+	          </div>
+	      
+	          <div class="input-div">
+	            <label>Tên thật</label>
+	            <input th:value="${firstName}" type="text" required name="firstName">
+	          </div>
+	      
+	          <div class="input-div">
+	            <label>Họ thật</label>
+	            <input th:value="${lastName}" type="text" required name="lastName">
+	          </div>
+	        </td>
+	
+	        <td style="padding-left: 20px;">
+	          <div class="input-div">
+	            <label>Mã OTP</label>
+	            <input th:value="${otp}" type="text" required name="Otp">
+	          </div>
+	
+	          <div class="input-div">
+	            <label>Tên nghệ sĩ (nghệ danh)</label>
+	            <input th:value="${artistName}" type="text" required name="artistName">
+	          </div>
+	
+	          <div class="input-div">
+	            <label>Ngày sinh</label>
+	            <input th:value="${dayOfBirth}" type="date" required name="dayOfBirth">
+	          </div>
+	      
+	          <div class="input-div" >
+	            <label>Quốc gia</label>
+	            <select name="country" >
+	              <option th:each="country:${countryList}" th:text="${country.name}" th:value="${country.id}" th:selected="${idOfCountry != null && idOfCountry == country.id}"></option>
+	            </select>
+	          </div>
+	
+	        </td>
+	      </tr>
+	
+	      <tr>
+	        <td>
+	          <div class="input-div-gender">
+	            <label>Giới tính: </label>
+	            <div>
+	              <label>
+	                <input th:checked="${(gender != null && gender == 'Nam') or gender == null}"  type="radio" value="Nam" name="gender" checked>
+	                Nam
+	              </label>
+	            </div>
+	            <div>
+	              <label>
+	                <input th:checked="${gender != null && gender == 'Nữ'}" type="radio" value="Nữ" name="gender">
+	                Nữ
+	              </label>
+	            </div>
+	          </div>
+	        </td>
+	        <td style="padding-left: 20px;">
+	          <div >
+	            <a href="#" class="otp-a" id="a-send-otp" >Gữi mã OTP</a>
+	          </div>
+	        </td>
+	      </tr>
+	    </table>
+
+	
+	    <div class="button-div">
+	      <button>Đăng kí</button>
+	    </div>
+	    
+	  </form>
+    <div class="a-div">
+      <a th:href="@{/login}">Đăng nhập</a>
+    </div>
+
+  </div>
+  
+  <script th:src="@{/js/register.js}"></script>
+</body>
+</html>

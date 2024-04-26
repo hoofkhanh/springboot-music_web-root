@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />	
+
+    <!-- lỗi GET http://127.0.0.1:5500/favicon.ico 404 (Not Found)
+          được fix bằng phía dưới
+     -->
+    <link rel="shortcut icon" href="#"> 
+
+    <title>Music Web</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/general.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/header.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/sidebar.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/index.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/pageOfPlayList.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/page-of-artist.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/page-of-track.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/upload-track-by-artist.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/upload-playlist-by-artist.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/search.css}" />
+        
+    <script th:src="@{/js/pageOfPlayList.js}"></script>
+  </head>
+  <body id="body">
+	 <div class="spinner-container">
+        <div class="spinner"></div>
+    </div>
+    
+    <header class="header">
+      <div class="left-header">
+        <div class="display-image-of-track-playlist" >
+          <a href="#">
+            <img id="image-of-track-playlist" src="#" alt="">
+          </a>
+        </div>
+        <div id="info-of-track-artist" class="info-of-track-artist">
+          <div id="all-display-name-of-track" class="all-display-name-of-track">
+            <a href="#" id="display-name-of-track"></a>
+          </div>
+          <div id="all-display-name-of-artist">
+          </div>
+        </div>
+        
+      </div>
+      <div class="middle-header">
+        <div class="all-button-for-play">
+          <button>
+            <i class="fa-solid fa-shuffle" id="icon-shuffle"></i>
+          </button>
+          <button>
+            <i id="icon-previous-track" class="fa-solid fa-backward"></i>
+          </button>
+          <button class="button-play-music">
+            <i class="fa-solid fa-play" id="icon-play-track"></i>
+          </button>
+          <button>
+            <i id="icon-next-track" class="fa-solid fa-forward"></i>
+          </button>
+          <button>
+            <i class="fa-solid fa-repeat" id="icon-repeat"></i>
+          </button>
+        </div>
+        <div class="duration-header">
+          <span id="start-duration"></span>
+          <input type="range" value="0" id="progress">
+          <span id="end-duration"></span>
+        </div>
+      </div>
+      <div class="volume-div">
+        <i id="volume-icon" class="fa-solid fa-volume-high"></i>
+        <input type="range" min="0" max="1" step="0.01" value="1" id="volume-input">
+      </div>
+      <div class="right-header">
+        <button class="button-queue-tracks">
+          <i id="i-queue-tracks" class="fa-solid fa-bars"></i>
+          <div id="queue-tracks" class="queue-track-class">
+            <h2>Danh sách phát</h2>
+            <input type="hidden" value="" id="valueOfTrack">
+              <div id="queue-track-in-playlist"  style="display: none;" class="track-in-playlist">
+                <div class="info-of-track-artist-in-page-playlist">
+                  <div class="image-of-track-artist-in-page-playlist">
+                    <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                    <a href="#" class="button-play-of-track-in-play-list" >
+                      <i class="fa-solid fa-play" ></i>
+                      <audio class="song" >
+                        <source type="audio/mpeg" 
+                          src="audio/popular-album/99-mck/00.mp3">
+                          <span>00_queue</span>
+                      </audio>
+                    </a>
+                  </div>
+                  <div class="name-of-track-artist-in-page-playlist" >
+                    <a class="name-of-track-in-page-playlist" href="#">
+                      00
+                    </a>
+                    <p class="name-of-artists-in-page-playlist">
+                      <a href="#" class="artist">RPT MCK</a>
+                    </p>
+                  </div>
+                </div>
+                <div class="time-of-track-artist-in-page-playlist">
+                  <span>0:00</span>
+                </div>
+              </div>
+          </div>
+        </button>
+        <button th:if="${#authentication.principal == null}" class="sign-up">
+          <a >Đăng ký</a>
+        </button>
+        <button th:if="${#authentication.principal == null}"  class="sign-in">
+          <a >Đăng nhập</a>
+        </button>
+        
+	  	<div class="dropdown">
+		  <button class="dropbtn">Tùy chọn</button>
+		  <div class="dropdown-content">
+			<div class="span-upload-track" th:if="${#authentication.principal != null}">
+				<a id="a-my-profile" th:value="${artistName}">Tài khoản của tôi</a>
+		  	</div>
+		    <div class="span-upload-track" th:if="${#authentication.principal != null}">
+				<a id="a-upload-track">Đăng nhạc</a>
+		  	</div>
+		  	<div class="span-upload-track" th:if="${#authentication.principal != null}">
+				<a id="a-upload-playlist">Tạo Album hoặc danh sách phát</a>
+		  	</div>
+		  	<div class="span-upload-track" th:if="${#authentication.principal != null}">
+				<a id="a-your-track">Nhạc của bạn</a>
+		  	</div>
+		  	
+		  	<input type="hidden" th:value="${roleOfArtist}" id="next-gen-package">
+		  	<div  class="span-buy-package-turn-of-ad" th:if="${#authentication.principal != null and roleOfArtist != 'ARTIST_NEXT_GEN'}">
+				<a th:href="@{/momo}" >Gói Next Gen</a>
+		  	</div>
+		  	
+		  	<div class="span-upload-track" th:if="${#authentication.principal != null}">
+				<a th:href="@{/logout}">Đăng xuất</a>
+		  	</div>
+		  	
+		  </div>
+		</div>
+	  </div>
+    </header>  
+
+    <nav class="sidebar">
+      <div class="top-sidebar">
+        <ul>
+          <li>
+            <div class="top-sidebar-link">
+              <a href="#" id="redirect-to-index">
+                <span><i class="fa-solid fa-house"></i>
+                </span>Trang chủ</a>
+            </div>
+          </li>
+          <li>
+            <div class="top-sidebar-link" >
+              <a href="#" id="i-search-track-album-playlist-artist">
+                <span><i class="fa-solid fa-magnifying-glass" ></i></span>
+                Tìm kiếm
+              </a>
+              
+          </li>
+          <input id="input-search-track-album-playlist-artist" placeholder="Tìm kiếm (không nhập chữ '\')" type="text">
+        </ul>
+      </div>
+      <div class="bottom-sidebar">
+        <div class="flex-bottom-sidebar">
+          <div class="top-sidebar-link">
+            <a href="#">
+              <span><i class="fa-solid fa-book-open"></i></span>
+              Thư viện
+            </a>
+          </div>
+          <div class="top-sidebar-link" id="top-sidebar-link-none">
+            <a href="#">
+              <i class="fa-solid fa-plus"></i>
+            </a>
+            <i class="fa-solid fa-arrow-right"></i>
+            <div class="hover-create-playlist">Tạo danh sách phát</div>
+            <div class="hover-read-more">Xem thêm</div>
+          </div>
+        </div>
+        <div class="filter-in-libary">
+			<a id="filter-all" href="#" style="display: none;">X</a>
+          <a id="filter-playlist-in-libary" href="#">Playlist</a>
+          <a id="filter-artist-in-libary"  href="#">Nghệ sĩ</a>
+          <a id="filter-album-in-libary"  href="#">Album</a>
+        </div>
+        <div class="search-in-libary">
+            <div class="search-input">
+              <i id="i-search-libary" class="fa-solid fa-magnifying-glass"></i>
+              <input id="input-search-libary" placeholder="Tìm trong thư viện" type="text">
+              <div id="hover-search-in-libary" class="hover-search-in-libary">
+                Tìm kiếm trong thư viện
+              </div>
+            </div>
+            <div class="search-recently">
+              <span>Gần đây <i class="fa-solid fa-list"></i></span>
+            </div>
+        </div>
+        <div class="all-track-playList-artist-in-libary" id="all-track-playList-artist-in-libary">
+          <div class="track-playList-artist-in-libary" id="artist-in-libary" style="display: none;">
+            <div class="image-of-artist"> 
+              <img src="images/libary/artist/wren-evans.jfif" alt="">
+            </div>
+            <div class="info-artist">
+              <p class="name-of-artist">Wren Evans</p>
+              <p class="role-of-track-playList">Nghệ sĩ</p>
+            </div>
+          </div>
+          
+          <div class="track-playList-artist-in-libary" id="track-playlist-in-libary" style="display: none;">
+            <div class="image-of-playList-track">
+              <img src="images/libary/playlist/wren-evans-radio" alt="">
+            </div>
+            <div class="info-artist">
+              <p class="name-of-artist">Wren Evans Radio</p>
+              <p class="role-of-track-playList">Danh sách phát<span> • Spotify</span></p>
+            </div>
+          </div>
+          
+          
+        </div>  
+      </div>
+    </nav>
+
+    <section id="index" class="display-music">
+      <div  class="famous-artists">
+        <img class="image-1" src="images/display-music/change-image/changeImage-1.webp" />
+        <img class="image-2" src="images/display-music/change-image/changeImage-2.webp" />
+        <img class="image-3" src="images/display-music/change-image/changeImage-3.webp" />
+        <img class="image-4" src="images/display-music/change-image/changeImage-5.webp" />
+        <img class="image-5" src="images/display-music/change-image/changeImage-4.webp" />
+      </div>
+      <div  class="all-playlist-artist-track" id="all-playlist-artist-track-index">
+        <div class="grid-all-playlist-artist-track">
+          <div class="title-and-see-all">
+            <h1><a href="#">Đã nghe gần đây</a></h1>
+            <h4><a href="#" id="href-delete-all-currentTrack" >Xóa tất cả</a></h4>
+            <h4><a href="#" id="href-display-all-currentTrack" style="width: 71px;display: block;">Hiện tất cả</a></h4>
+          </div>
+          <div id="recently-playlist" class="grid-playlist-artist-track">
+            <div style="display: none;" id="artist-in-recently-playlist" class="playlist-artist-track artist">
+              <div class="image-of-artist-in-playlist-artist-track">
+                <img src="images/display-music/recently-played/artist/wrxdie-artist.jfif" alt="">
+                <span class="hidden-name-of-playlist">wrxdie_recently_artist</span>
+                <span class="icon-delete"><a>X</a></span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">Wrxdie</p>
+                <p class="artist-of-playlist-artist-track">Nghệ sĩ</p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+            <div style="display: none;" id="track-in-recently-playlist" class="playlist-artist-track track">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/recently-played/track/mai-linh.jfif" alt="">
+                <span class="hidden-name-of-playlist">Mai Linh</span>
+                <span class="icon-delete"><a>X</a></span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">Mai Linh</p>
+                <p class="artist-of-playlist-artist-track">
+                  <a href="#" class="artist">RZ Mas</a>
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+            <div style="display: none;" id="playlist-in-recently-playlist" class="playlist-artist-track album-or-playlist">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/recently-played/playlist/moi-ra-lo.jfif" alt="">
+                <span class="hidden-name-of-playlist">moi_ra_lo_recently_playlist</span>
+                <span class="icon-delete"><a>X</a></span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">Mới ra lò</p>
+                <p class="artist-of-playlist-artist-track">
+                  <a href="#" class="artist">RZ Mas</a>
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+            
+          </div>
+        </div>
+        
+        
+        <div class="grid-all-playlist-artist-track">
+          <div class="title-and-see-all">
+            <h1><a href="#">Đã tìm kiếm gần đây</a></h1>
+            <h4><a href="#" id="href-delete-all-searchTrack" >Xóa tất cả</a></h4>
+            <h4><a href="#" id="href-display-all-searchTrack" style="width: 71px;display: block;">Hiện tất cả</a></h4>
+          </div>
+          <div id="search-playlist" class="grid-playlist-artist-track">
+            <div style="display: none;" id="artist-in-search-playlist" class="playlist-artist-track artist">
+              <div class="image-of-artist-in-playlist-artist-track">
+                <img src="images/display-music/recently-played/artist/wrxdie-artist.jfif" alt="">
+                <span class="hidden-name-of-playlist">wrxdie_recently_artist</span>
+                <span class="icon-delete-in-search"><a>X</a></span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">Wrxdie</p>
+                <p class="artist-of-playlist-artist-track">Nghệ sĩ</p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+            <div style="display: none;" id="track-in-search-playlist" class="playlist-artist-track track">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/recently-played/track/mai-linh.jfif" alt="">
+                <span class="hidden-name-of-playlist">Mai Linh</span>
+                <span class="icon-delete-in-search"><a>X</a></span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">Mai Linh</p>
+                <p class="artist-of-playlist-artist-track">
+                  <a href="#" class="artist">RZ Mas</a>
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+            <div style="display: none;" id="playlist-in-search-playlist" class="playlist-artist-track album-or-playlist">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/recently-played/playlist/moi-ra-lo.jfif" alt="">
+                <span class="hidden-name-of-playlist">moi_ra_lo_recently_playlist</span>
+                <span class="icon-delete-in-search"><a>X</a></span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">Mới ra lò</p>
+                <p class="artist-of-playlist-artist-track">
+                  <a href="#" class="artist">RZ Mas</a>
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+            
+          </div>
+        </div>
+        
+        
+        
+        <div class="grid-all-playlist-artist-track master-playlist" id="master-playlist" style="display: none;">
+          <div class="title-and-see-all">
+            <h1><a href="#">Lựa chọn của ADMIN</a></h1>
+            <h4><a href="#">Hiện tất cả</a></h4>
+          </div>
+          
+          <div  class="grid-playlist-artist-track">
+            <div  class="playlist-artist-track album-or-playlist" id="playlist-in-master-playlist">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/recently-played/playlist/ai-cung-phai-bdtdd.jfif" alt="">
+                <span class="hidden-name-of-playlist">Ai cũng phải bắt đầu từ đâu đó_recently_album</span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+	                <p class="name-of-playlist-artist-track">
+	                  Ai Cũng Phải Bắt Đầu Từ Đâu Đó
+	                </p>
+	                <p class="artist-of-playlist-artist-track">
+	                  <a href="#" class="artist">HIEUTHUHAI</a>
+	                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+          </div>
+          
+        </div>
+        
+
+        <div class="grid-all-playlist-artist-track">
+          <div class="title-and-see-all">
+            <h1><a href="#">Album phổ biến</a></h1>
+            <h4><a href="#">Hiện tất cả</a></h4>
+          </div>
+          <div class="grid-playlist-artist-track">
+            <div class="playlist-artist-track album-or-playlist" >
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/popular-albums/loi-choi-wren-evans.jfif" alt="">
+                <span class="hidden-name-of-playlist">LOI CHOI: The Neo Pop Punk_popular_album</span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">LOI CHOI: The Neo Pop Punk</p>
+                <p class="artist-of-playlist-artist-track">
+                  <a href="#" class="artist">Wren Evans</a>,
+                  <a href="#" class="artist">itsnk</a>
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+            <div class="playlist-artist-track album-or-playlist" >
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                <span class="hidden-name-of-playlist">99%_popular_album</span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">99%</p>
+                <p class="artist-of-playlist-artist-track">
+                  <a href="#" class="artist">RPT MCK</a>
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+            <div class="playlist-artist-track album-or-playlist">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/popular-albums/danh-doi-obito.jfif" alt="">
+                <span class="hidden-name-of-playlist">Đánh Đổi_popular_album</span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">Đánh Đổi</p>
+                <p class="artist-of-playlist-artist-track">
+                  <a href="#" class="artist">Obito</a>
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+            <div class="playlist-artist-track album-or-playlist">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/popular-albums/ai-cung-pbdtdd-ht2.jfif" alt="">
+                <span class="hidden-name-of-playlist">Ai cũng phải bắt đầu từ đâu đó_popular_album</span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">Ai cũng phải bắt đầu từ đâu đó</p>
+                <p class="artist-of-playlist-artist-track">
+                  <a href="#" class="artist">HIEUTHUHAI</a>
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>  
+            <div class="playlist-artist-track album-or-playlist">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/popular-albums/ai-tlinh.jfif" alt="">
+                <span class="hidden-name-of-playlist">album_ái_popular_album</span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">ái</p>
+                <p class="artist-of-playlist-artist-track">
+                  <a href="#" class="artist">tlinh</a>
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-all-playlist-artist-track">
+          <div class="title-and-see-all">
+            <h1><a href="#">Nghệ sĩ phổ biến</a></h1>
+            <h4><a href="#">Hiện tất cả</a></h4>
+          </div>
+          <div class="grid-playlist-artist-track">
+            <div class="playlist-artist-track artist">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/popular-artists/rpt-mck.jfif" alt="">
+                <span class="hidden-name-of-playlist">RPT_MCK_popular_artist</span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">RPT MCK</p>
+                <p class="artist-of-playlist-artist-track">
+                  Nghệ sĩ
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+            <div class="playlist-artist-track artist">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/popular-artists/itsnk.jfif" alt="">
+                <span class="hidden-name-of-playlist">itsnk_popular_artist</span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">itsnk</p>
+                <p class="artist-of-playlist-artist-track">
+                  Nghệ sĩ
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+            <div class="playlist-artist-track artist">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/popular-artists/wren-evans.jfif" alt="">
+                <span class="hidden-name-of-playlist">Wren_Evans_popular_artist</span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">Wren Evans</p>
+                <p class="artist-of-playlist-artist-track">
+                  Nghệ sĩ
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+            <div class="playlist-artist-track artist">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/popular-artists/tlinh.jfif" alt="">
+                <span class="hidden-name-of-playlist">tlinh_popular_artist</span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">tlinh</p>
+                <p class="artist-of-playlist-artist-track">
+                  Nghệ sĩ
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>  
+            <div class="playlist-artist-track artist">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/popular-artists/obito.jfif" alt="">
+                <span class="hidden-name-of-playlist">Obito_popular_artist</span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">Obito</p>
+                <p class="artist-of-playlist-artist-track">
+                  Nghệ sĩ
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div  style="padding-bottom: 70px;"></div>
+
+    </section>
+
+    <section id="display-all-track" class="display-music">
+      <div class="famous-artists">
+        <img class="image-1" src="images/display-music/change-image/changeImage-1.webp" />
+        <img class="image-2" src="images/display-music/change-image/changeImage-2.webp" />
+        <img class="image-3" src="images/display-music/change-image/changeImage-3.webp" />
+        <img class="image-4" src="images/display-music/change-image/changeImage-5.webp" />
+        <img class="image-5" src="images/display-music/change-image/changeImage-4.webp" />
+      </div>
+      <div class="all-playlist-artist-track">
+        <div class="grid-all-playlist-artist-track">
+          <div class="title-and-see-all">
+            <h1 id="title-of-track-display-all-track"></h1>
+          </div>
+          <div id="all-track" class="grid-playlist-artist-track">
+            <div style="display: none;" id="track-in-your-track" class="playlist-artist-track track">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img th:src="@{/images/display-music/recently-played/track/buon-hay-vui.jfif}" alt="">
+                <span class="hidden-name-of-playlist">Buồn Hay Vui(feat.RPT MCK, Obito, Ronboogz & Boyzed)_recently_track</span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">
+   					Buồn Hay Vui(feat.RPT MCK, Obito, Ronboogz & Boyzed)
+                </p>
+                <p class="artist-of-playlist-artist-track">
+                  <a href="#" class="artist"></a>
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+           </div>
+          <div class="title-and-see-all margin-top">
+            <h1 id="title-of-album-display-all-track"></h1>
+          </div>
+          <div id="all-playlist" class="grid-playlist-artist-track">
+            <div style="display: none;" id="album-in-your-track" class="playlist-artist-track album-or-playlist">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/recently-played/playlist/ai-cung-phai-bdtdd.jfif" alt="">
+                <span class="hidden-name-of-playlist">Ai cũng phải bắt đầu từ đâu đó_recently_album</span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">
+                  Ai Cũng Phải Bắt Đầu Từ Đâu Đó
+                </p>
+                <p class="artist-of-playlist-artist-track">
+                  <a href="#" class="artist">HIEUTHUHAI</a>
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="title-and-see-all margin-top">
+            <h1 id="title-of-playlist-display-all-track"></h1>
+          </div>
+          <div id="all-playlist-in-display-of-track" class="grid-playlist-artist-track">
+            <div style="display: none;" id="playlist-in-your-track" class="playlist-artist-track album-or-playlist">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/recently-played/playlist/ai-cung-phai-bdtdd.jfif" alt="">
+                <span class="hidden-name-of-playlist">Ai cũng phải bắt đầu từ đâu đó_recently_album</span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">
+                  Ai Cũng Phải Bắt Đầu Từ Đâu Đó
+                </p>
+                <p class="artist-of-playlist-artist-track">
+                  <a href="#" class="artist">HIEUTHUHAI</a>
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding-bottom: 0px;"></div>
+    </section>
+
+    <section id="page-of-play-list" class="display-music">
+      <div class="background-playlist">
+        <div class="image-info-background-playlist">
+          <div >
+            <img class="avatar" id="avatar-page-of-playlist"
+            src="images/display-music/popular-albums/99-mck.jfif" >
+          </div>
+          <div id='info-background-playlist' class="info-background-playlist">
+            <p>Album</p>
+            <h1>99%</h1>
+            <div id="important-info-background-playlist" class="important-info-background-playlist">
+              <img  src="images/display-music/profile-avatar/rpt-mck.jfif" style="height: 25px;" alt="">
+              <a href="#">RPT MCK </a>
+              <span id="dateOfPlaylist"></span>
+              <span id="numberOfTracks">• 16 bài hát,</span>
+              <span id="timeOfPlaylist">40 phút 58 giây</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="display-playlist" class="display-playlist">
+        <div class="button-play-saveToLibary">
+          <a href="#" id="button-play-in-playlist">
+            <i class="fa-solid fa-play"></i>
+            <span  style="display: none;"></span>
+          </a>
+          <a id="button-save-to-libary-page-of-playlist" href="#">
+            <i class="fa-solid fa-heart"></i>
+          </a>
+          <a href="#" id="button-share-in-playlist">
+			  <i class="fa-solid fa-share"></i>
+		  </a>
+        </div>
+      </div>
+      <div class="display-music-of-playlist">
+        <div class="th-of-music">
+          <span class="title-in-th-of-music">Tên bài hát</span>
+          <span class="image-in-th-of-music">
+            <i class="fa-regular fa-image"></i>
+          </span>
+          <span class="time"><i class="fa-regular fa-clock"></i></span>
+          <span class="eye"><i class="fa-regular fa-eye"></i></span>
+        </div>
+        <div id="all-music-in-playlist" class="all-music-in-playlist">
+          <div id="track-in-playlist" style="display: none;" class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">1</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">00</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">RPT MCK</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/popular-albums/99-mck.jfif" alt="" style="width: 36px;height: 36px; object-fit: cover;">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>0:33</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>1.228.761</span>
+            </div>
+          </div>
+        
+        </div>   
+      </div>
+
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+        <div class="title-and-see-all">
+          <h1>
+            <a href="display-all-track.html">
+              Album và bài hát khác của <span id="albumAndTrackOfUserInPageOfPlaylist">RPT MCK</span>
+            </a>
+          </h1>
+          <h4><a id="button-see-all-track-in-page-of-playlist" href="#">Hiện tất cả</a></h4>
+        </div>
+        <div id="all-track-in-page-of-playlist" class="grid-playlist-artist-track">
+          <div style="display: none;" id="track-in-page-of-playlist"  class="playlist-artist-track track">
+            <div class="image-of-playlist-track-in-playlist-artist-track">
+              <img src="images/display-music/the-other-albums-tracks/phong-cach.jfif" alt="">
+              <span class="hidden-name-of-playlist">Phong Cách_the_other_albums_tracks_page_of_playlist</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Phong Cách</p>
+              <p class="artist-of-playlist-artist-track">
+                <a href="#" class="artist">RPT MCK</a>
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+         
+        </div>
+      </div>
+
+      <!--<div class="display-music-of-playlist recommend-margin-top">
+        <h1 class="recommend">Đề Xuất</h1>
+        <div class="th-of-music">
+          <span class="title-in-th-of-music">Tên bài hát</span>
+          <span class="image-in-th-of-music">
+            <i class="fa-regular fa-image"></i>
+          </span>
+          <span class="time"><i class="fa-regular fa-clock"></i></span>
+          <span class="eye"><i class="fa-regular fa-eye"></i></span>
+        </div>
+        <div class="all-music-in-playlist">
+          <div class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">1</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+                <audio class="song" >
+                  <source type="audio/mpeg" 
+                    src="audio/recommend/AnhĐãQuenVớiCôĐơn.mp3">
+                    <span>Anh Đã Quen Với Cô Đơn_recommend_page_of_playlist</span>
+                </audio>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Anh Đã Quen Với Cô Đơn</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">SOOBIN</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recommend-track/anh-da-quen-voi-co-don.jfif" alt="">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>4:28</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>7.744.557</span>
+            </div>
+          </div>
+          <div class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">2</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+                <audio class="song" >
+                  <source type="audio/mpeg" 
+                    src="audio/recommend/Emiu.mp3">
+                    <span>Em iu_recommend_page_of_playlist</span>
+                </audio>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Em Iu</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">Andree Right Hand</a>,
+                  <a href="#" class="artist">Wrxdie</a>,
+                  <a href="#" class="artist">Bình Gold</a>,
+                  <a href="#" class="artist">2pillz</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recommend-track/em-iu.jfif" alt="">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>2:59</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>10.628.288</span>
+            </div>
+          </div>
+          <div class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">3</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+                <audio class="song" >
+                  <source type="audio/mpeg" 
+                    src="audio/recommend/LanMan.mp3">
+                    <span>Lan Man_recommend_page_of_playlist</span>
+                </audio>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Lan Man</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">Ronboogz</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recommend-track/lan-man.jfif" alt="">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>3:36</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>9.413.185</span>
+            </div>
+          </div>
+          <div class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">4</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+                <audio class="song" >
+                  <source type="audio/mpeg" 
+                    src="audio/recommend/TayTo.mp3">
+                    <span>Tay to_recommend_page_of_playlist</span>
+                </audio>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Tay To</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">Rapital</a>,
+                  <a href="#" class="artist">RPT MCK</a>,
+                  <a href="#" class="artist">Phongkhin</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recommend-track/tay-to.jfif" alt="">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>2:45</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>12.529.675</span>
+            </div>
+          </div>
+          <div class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">5</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+                <audio class="song" >
+                  <source type="audio/mpeg" 
+                    src="audio/recommend/TrướcKhiEmTồnTại.mp3">
+                    <span>Trước Khi Em Tồn Tại_recommend_page_of_playlist</span>
+                </audio>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Trước Khi Em Tồn Tại</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">Thắng</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recommend-track/truoc-khi-em-ton-tai.jfif" alt="">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>3:14</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>7.413.221</span>
+            </div>
+          </div>
+        </div>   
+      </div>-->
+      
+      <div id="aa" style="padding-bottom: 70px;"></div>
+    </section>
+
+    <section id="page-of-artist" class="display-music">
+      <div class="background-playlist">
+        <div class="image-info-background-playlist">
+          <div style="position: relative;">
+            <img class="avatar" id="avatar-page-of-artist" 
+            src="images/display-music/profile-avatar/rpt-mck.jfif" >
+            
+            <iframe name="iframChangeImage" id="iframChangeImage" style="display: none;" ></iframe>
+            <div id="div-change-image-in-profile" >
+				<form id="form-change-image" th:action="@{/artists/changeAvatarOfArtist}" enctype="multipart/form-data" method="post" target="iframChangeImage">
+					<input name="artistName" type="hidden" value="" class="idOfTrackInChangeImage">
+					<input name="avatarOfArtist" type="file" id="change-image-in-profile"  accept="image/png, image/gif, image/jpeg" >
+					<input  type="submit" value="Lưu" class="submitChangeImage" id="submitChangeImage">
+					<button type="button" class="closeChangeImage" id="closeChangeImage">Hủy</button>
+				</form>
+			</div>
+          </div>
+          <div id="info-background-artist" class="info-background-playlist">
+            <h1>RPT MCK</h1>
+            <div id="important-info-background-artist" class="important-info-background-playlist">
+              <a id="followers-in-page-of-artist" href="#">1.500.273 người theo dõi</a>
+              <a id="followings-in-page-of-artist" href="#">• Đang theo dõi 500 người</a>
+            </div>
+            <a id="button-follow" href="#">
+              Theo dõi
+            </a>
+          </div>
+        </div>
+      </div>
+      <div id="display-playlist" class="display-playlist">
+        <div class="button-play-saveToLibary" id="button-play-saveToLibary-in-page-of-artist">
+          <a  href="#" id="button-play-in-artist" >
+            <i class="fa-solid fa-play" style="width: 15px;"></i>
+            <span  style="display: none;"></span>
+          </a> 
+          <!--<a id="button-save-to-libary-page-of-artist" href="#">
+            <i class="fa-regular fa-heart"></i>
+          </a>-->
+        </div>
+      </div>
+      <div id="big-all-music-in-artist" class="display-music-of-playlist">
+        <h2 class="popular-h2">Phổ biến</h2>
+        <div class="th-of-music">
+          <span class="title-in-th-of-music">Tên bài hát</span>
+          <span class="image-in-th-of-music">
+            <i class="fa-regular fa-image"></i>
+          </span>
+          <span class="time"><i class="fa-regular fa-clock"></i></span>
+          <span class="eye"><i class="fa-regular fa-eye"></i></span>
+        </div>
+        <div id="all-music-in-artist" class="all-music-in-playlist">
+          <div id="track-in-artist" class="track-in-playlist" style="display: none;">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">1</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Buồn Hay Vui(feat.RPT MCK, Obito, Ronboogz & Boyzed)</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">VSOUL</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recently-played/track/buon-hay-vui.jfif" alt="" style="width: 36px; height: 36px; object-fit: cover;">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>4:51</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>7.527.983</span>
+            </div>
+          </div>
+          
+        </div>   
+      </div>
+      
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+        <div class="title-and-see-all">
+          <h1>
+            <a class="button-see-all-track-album-in-page-of-artist" href="#">
+              Chia sẻ của nghệ sĩ
+            </a>
+          </h1>
+        </div>
+        <div id="all-share-track-in-page-of-artist" class="grid-playlist-artist-track">
+          <div style="display: none;" id="share-track-in-page-of-artist" class="playlist-artist-track track">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/recently-played/track/mai-linh.jfif" alt="">
+                <span class="hidden-name-of-playlist"></span>
+                <span class="icon-delete"><a>X</a></span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track"></p>
+                <p class="artist-of-playlist-artist-track">
+                  <a href="#" class="artist"></a>
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+              <p class="message-text">thnhi : aaa</p>
+              <span class="hidden-share-id" style="display: none;"></span>
+          </div>
+          
+          <div style="display: none;" id="share-playlist-in-page-of-artist" class="playlist-artist-track album-or-playlist">
+              <div class="image-of-playlist-track-in-playlist-artist-track">
+                <img src="images/display-music/recently-played/playlist/moi-ra-lo.jfif" alt="">
+                <span class="hidden-name-of-playlist"></span>
+                <span class="icon-delete"><a>X</a></span>
+              </div>
+              <div class="info-artist-in-playlist-artist-track">
+                <p class="name-of-playlist-artist-track">Mới ra lò</p>
+                <p class="artist-of-playlist-artist-track">
+                  <a href="#" class="artist"></a>
+                </p>
+              </div>
+              <a href="#" class="button-play">
+                <i class="fa-solid fa-play"></i>
+              </a>
+              <p class="message-text">thnhi : aaa</p>
+              <span class="hidden-share-id" style="display: none;"></span>
+           </div>
+    
+         
+        </div>
+      </div>
+  
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+        <div class="title-and-see-all">
+          <h1>
+            <a class="button-see-all-track-album-in-page-of-artist" href="#">
+              Đĩa đơn
+            </a>
+          </h1>
+          <h4><a class="button-see-all-track-album-in-page-of-artist" href="#">Hiện tất cả</a></h4>
+        </div>
+        <div id="all-single-track-in-page-of-artist" class="grid-playlist-artist-track">
+          <div id="single-track-in-page-of-artist" class="playlist-artist-track track" style="display: none;">
+            <div class="image-of-playlist-track-in-playlist-artist-track">
+              <img src="images/display-music/the-other-albums-tracks/phong-cach.jfif" alt="">
+              <span class="hidden-name-of-playlist">Phong Cách_single_track_page_of_aritst</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Phong Cách</p>
+              <p class="artist-of-playlist-artist-track">
+                <a href="#" class="artist">RPT MCK</a>
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+         
+        </div>
+      </div>
+  
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+        <div class="title-and-see-all">
+          <h1>
+            <a class="button-see-all-track-album-in-page-of-artist"  href="#">
+              Album
+            </a>
+          </h1>
+          <h4><a class="button-see-all-track-album-in-page-of-artist" href="#">Hiện tất cả</a></h4>
+        </div>
+        <div id="all-album-in-page-of-artist" class="grid-playlist-artist-track">
+          <div style="display: none;" id="album-in-page-of-artist" class="playlist-artist-track album-or-playlist">
+            <div class="image-of-playlist-track-in-playlist-artist-track">
+              <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+              <span class="hidden-name-of-playlist">99%_album_in_page_of_artist</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">99%</p>
+              <p class="artist-of-playlist-artist-track">
+                <a href="#" class="artist">RPT MCK</a>
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+        <div  class="title-and-see-all">
+          <h1>
+            <a class="button-see-all-track-album-in-page-of-artist"  href="#">
+              Playlist
+            </a>
+          </h1>
+          <h4><a class="button-see-all-track-album-in-page-of-artist" href="#">Hiện tất cả</a></h4>
+        </div>
+        <div id="all-playlist-in-page-of-artist" class="grid-playlist-artist-track">
+          <div style="display: none;" id="playlist-in-page-of-artist" class="playlist-artist-track album-or-playlist">
+            <div class="image-of-playlist-track-in-playlist-artist-track">
+              <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+              <span class="hidden-name-of-playlist">99%_album_in_page_of_artist</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">99%</p>
+              <p class="artist-of-playlist-artist-track">
+                <a href="#" class="artist">RPT MCK</a>
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+  
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+        <div class="title-and-see-all">
+          <h1>
+            <a  href="#">
+              Nghệ sĩ khác
+            </a>
+          </h1>
+        </div>
+        <div id="all-the-other-artist-in-page-of-artist" class="grid-playlist-artist-track">
+          <div id="the-other-artist-in-page-of-artist" style="display: none;" class="playlist-artist-track artist">
+            <div class="image-of-artist-in-playlist-artist-track">
+              <img src="images/display-music/recently-played/artist/wrxdie-artist.jfif" alt="">
+              <span class="hidden-name-of-playlist">Wrxdie_artist_in_page_of_artist</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Wrxdie</p>
+              <p class="artist-of-playlist-artist-track">
+                Nghệ sĩ
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+          
+        </div>
+      </div>
+  
+      <!--<div class="display-music-of-playlist recommend-margin-top">
+        <h1 class="recommend">Đề Xuất</h1>
+        <div class="th-of-music">
+          <span class="title-in-th-of-music">Tên bài hát</span>
+          <span class="image-in-th-of-music">
+            <i class="fa-regular fa-image"></i>
+          </span>
+          <span class="time"><i class="fa-regular fa-clock"></i></span>
+          <span class="eye"><i class="fa-regular fa-eye"></i></span>
+        </div>
+        <div class="all-music-in-playlist">
+          <div class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">1</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+                <audio class="song" >
+                  <source type="audio/mpeg" 
+                    src="audio/recommend/AnhĐãQuenVớiCôĐơn.mp3">
+                    <span>Anh Đã Quen Với Cô Đơn_recommend_page_of_artist</span>
+                </audio>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Anh Đã Quen Với Cô Đơn</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">SOOBIN</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recommend-track/anh-da-quen-voi-co-don.jfif" alt="">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>4:28</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>7.744.557</span>
+            </div>
+          </div>
+          <div class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">2</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+                <audio class="song" >
+                  <source type="audio/mpeg" 
+                    src="audio/recommend/Emiu.mp3">
+                    <span>Em iu_recommend_page_of_artist</span>
+                </audio>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Em Iu</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">Andree Right Hand</a>,
+                  <a href="#" class="artist">Wrxdie</a>,
+                  <a href="#" class="artist">Bình Gold</a>,
+                  <a href="#" class="artist">2pillz</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recommend-track/em-iu.jfif" alt="">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>2:59</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>10.628.288</span>
+            </div>
+          </div>
+          <div class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">3</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+                <audio class="song" >
+                  <source type="audio/mpeg" 
+                    src="audio/recommend/LanMan.mp3">
+                    <span>Lan Man_recommend_page_of_artist</span>
+                </audio>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Lan Man</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">Ronboogz</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recommend-track/lan-man.jfif" alt="">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>3:36</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>9.413.185</span>
+            </div>
+          </div>
+          <div class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">4</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+                <audio class="song" >
+                  <source type="audio/mpeg" 
+                    src="audio/recommend/TayTo.mp3">
+                    <span>Tay to_recommend_page_of_artist</span>
+                </audio>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Tay To</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">Rapital</a>,
+                  <a href="#" class="artist">RPT MCK</a>,
+                  <a href="#" class="artist">Phongkhin</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recommend-track/tay-to.jfif" alt="">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>2:45</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>12.529.675</span>
+            </div>
+          </div>
+          <div class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">5</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+                <audio class="song" >
+                  <source type="audio/mpeg" 
+                    src="audio/recommend/TrướcKhiEmTồnTại.mp3">
+                    <span>Trước Khi Em Tồn Tại_recommend_page_of_artist</span>
+                </audio>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Trước Khi Em Tồn Tại</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">Thắng</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recommend-track/truoc-khi-em-ton-tai.jfif" alt="">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>3:14</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>7.413.221</span>
+            </div>
+          </div>
+        </div>   
+      </div>-->
+      
+      <div id="aa" style="padding-bottom: 70px;"></div>
+    </section>
+
+    <section id="page-of-track" class="display-music">
+      <div class="background-playlist">
+        <div class="image-info-background-playlist">
+          <div >
+            <img id="avatar-page-of-track" class="avatar" 
+            	src="images/display-music/image-in-page-of-track/mai-linh.jfif" >
+          </div>
+          <div id="info-background-track" class="info-background-playlist">
+            <h4>Bài hát</h4>
+            <h1>Mai Linh</h1>
+            <div id="important-info-background-track" class="important-info-background-playlist">
+              <img th:src="@{/images/display-music/profile-avatar/rz-mas.jfif}" style="height: 25px;" alt="">
+              <a href="#">RZ Max</a>
+              <span id="dateOfTrack">• 27 tháng 2 năm 2023 </span>
+              <span id="timeOfTrack">• 2 phút 39 giây</span>
+              <span id="numberOfListenOfTrack">• 305.590 lượt nghe</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="display-playlist" class="display-playlist">
+        <div class="button-play-saveToLibary">
+          <a href="#" id="button-play-in-track">
+            <i style="width: 15px;" class="fa-solid fa-play"></i>
+            <span style="display: none;"></span>
+          </a>
+          <a id="button-save-to-libary-page-of-track" href="#">
+            <i class="fa-solid fa-heart"></i>
+          </a>
+          <a href="#" id="button-share-in-track">
+			  <i class="fa-solid fa-share"></i>
+		  </a>
+        </div>
+      </div>
+      
+      <div class="display-music-of-playlist">
+        <div id="all-artist-in-page-of-track" class="all-music-in-playlist">
+          <div id="artist-in-page-of-track" class="track-in-playlist pointer artist" style="display: none;">
+            <div class="info-of-track-artist-in-page-playlist">
+              <img class="avatar-profile" src="images/display-music/profile-avatar/rz-mas.jfif" alt="">
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist">RZ Mas</a>
+                <p class="name-of-artists-in-page-playlist role-artist-in-page-of-track">
+                  Nghệ sĩ
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>   
+      </div>
+  
+      <div id="big-all-popular-track-of-artist-in-page-of-track" class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top other-track-of-multil-artist">
+        <div class="title-and-see-all">
+          <h1>
+            <a  href="#">
+              Các bài nhạc thịnh hành của <span class="name-of-artist"></span>
+            </a>
+          </h1>
+          <h4><a class="button-see-all-track-in-page-of-track" href="#">Hiện tất cả</a></h4>
+        </div>
+        <div id="all-popular-track-of-artist-in-page-of-track" class="grid-playlist-artist-track">
+          <div id="popular-track-of-artist-in-page-of-track" style="display: none;" class="playlist-artist-track track">
+            <div class="image-of-playlist-track-in-playlist-artist-track">
+              <img src="images/display-music/the-other-albums-tracks/phong-cach.jfif" alt="">
+              <span class="hidden-name-of-playlist">Phong Cách_single_track_of_RZ Mas_page_of_track</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Phong Cách</p>
+              <p class="artist-of-playlist-artist-track">
+                <a href="#" class="artist">RPT MCK</a>
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+  
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+        <div class="title-and-see-all">
+          <h1>
+            <a href="#">
+              Nghệ sĩ khác
+            </a>
+          </h1>
+        </div>
+        <div id="all-the-other-artist-in-page-of-track" class="grid-playlist-artist-track artist">
+          <div id="the-other-artist-in-page-of-track" style="display: none;" class="playlist-artist-track artist">
+            <div class="image-of-artist-in-playlist-artist-track">
+              <img th:src="@{/images/display-music/recently-played/artist/wrxdie-artist.jfif}" alt="">
+              <span class="hidden-name-of-playlist">Wrxdie_artist_in_page_of_track</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Wrxdie</p>
+              <p class="artist-of-playlist-artist-track">
+                Nghệ sĩ
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+          
+        </div>
+      </div>
+  
+      <!--<div class="display-music-of-playlist recommend-margin-top">
+        <h1 class="recommend">Đề Xuất</h1>
+        <div class="th-of-music">
+          <span class="title-in-th-of-music">Tên bài hát</span>
+          <span class="image-in-th-of-music">
+            <i class="fa-regular fa-image"></i>
+          </span>
+          <span class="time"><i class="fa-regular fa-clock"></i></span>
+          <span class="eye"><i class="fa-regular fa-eye"></i></span>
+        </div>
+        <div class="all-music-in-playlist">
+          <div class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">1</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+                <audio class="song" >
+                  <source type="audio/mpeg" 
+                    src="audio/recommend/AnhĐãQuenVớiCôĐơn.mp3">
+                    <span>Anh Đã Quen Với Cô Đơn_recommend_page_of_track</span>
+                </audio>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Anh Đã Quen Với Cô Đơn</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">SOOBIN</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recommend-track/anh-da-quen-voi-co-don.jfif" alt="">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>4:28</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>7.744.557</span>
+            </div>
+          </div>
+          <div class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">2</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+                <audio class="song" >
+                  <source type="audio/mpeg" 
+                    src="audio/recommend/Emiu.mp3">
+                    <span>Em iu_recommend_page_of_track</span>
+                </audio>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Em Iu</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">Andree Right Hand</a>,
+                  <a href="#" class="artist">Wrxdie</a>,
+                  <a href="#" class="artist">Bình Gold</a>,
+                  <a href="#" class="artist">2pillz</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recommend-track/em-iu.jfif" alt="">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>2:59</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>10.628.288</span>
+            </div>
+          </div>
+          <div class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">3</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+                <audio class="song" >
+                  <source type="audio/mpeg" 
+                    src="audio/recommend/LanMan.mp3">
+                    <span>Lan Man_recommend_page_of_track</span>
+                </audio>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Lan Man</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">Ronboogz</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recommend-track/lan-man.jfif" alt="">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>3:36</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>9.413.185</span>
+            </div>
+          </div>
+          <div class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">4</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+                <audio class="song" >
+                  <source type="audio/mpeg" 
+                    src="audio/recommend/TayTo.mp3">
+                    <span>Tay to_recommend_page_of_track</span>
+                </audio>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Tay To</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">Rapital</a>,
+                  <a href="#" class="artist">RPT MCK</a>,
+                  <a href="#" class="artist">Phongkhin</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recommend-track/tay-to.jfif" alt="">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>2:45</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>12.529.675</span>
+            </div>
+          </div>
+          <div class="track-in-playlist">
+            <div class="info-of-track-artist-in-page-playlist">
+              <span class="index-of-track-in-play-list">5</span>
+              <a href="#" class="button-play-of-track-in-play-list">
+                <i class="fa-solid fa-play"></i>
+                <audio class="song" >
+                  <source type="audio/mpeg" 
+                    src="audio/recommend/TrướcKhiEmTồnTại.mp3">
+                    <span>Trước Khi Em Tồn Tại_recommend_page_of_track</span>
+                </audio>
+              </a>
+              <div class="name-of-track-artist-in-page-playlist">
+                <a href="#" class="name-of-track-in-page-playlist track">Trước Khi Em Tồn Tại</a>
+                <p class="name-of-artists-in-page-playlist">
+                  <a href="#" class="artist">Thắng</a>
+                </p>
+              </div>
+            </div>
+            <div class="image-of-track-artist-in-page-playlist">
+              <img src="images/display-music/recommend-track/truoc-khi-em-ton-tai.jfif" alt="">
+            </div>
+            <div class="time-of-track-artist-in-page-playlist">
+              <span>3:14</span>
+            </div>
+            <div class="listens-of-track-artist-in-page-playlist">
+              <a href="#">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <span>7.413.221</span>
+            </div>
+          </div>
+        </div>   
+      </div>-->
+  
+      <div id="aa" style="padding-bottom: 70px;"></div>
+    </section>
+    
+    <section id="upload-track-by-artist" class="display-music">
+      <div class="form-upload-track">
+		 <h1 style="margin-bottom: 50px;">
+			 <a id="edit-text-in-upload-track-by-artist" style="text-decoration: none; color: blue; cursor: pointer;"ref="#">Nếu bạn muốn chỉnh sửa lại nhạc thì hãy click vào</a>
+		 </h1>
+		 
+		 <h1 style="margin-bottom: 50px;">
+			 <a id="delete-text-in-upload-track-by-artist" style="text-decoration: none; color: red; cursor: pointer;"ref="#">Nếu bạn muốn xóa nhạc thì hãy click vào</a>
+		 </h1>
+		 
+		<iframe name="iframeAddTrack" id="iframeAddTrack" style="display: none;" ></iframe>
+        <form id="upload-track-form" enctype="multipart/form-data" method="post" th:action="@{/tracks/add}" target="iframeAddTrack">
+		  <input  id="id-in-upload-track-form" type="hidden" name="id" value="">
+		  <input  id="track-duration-in-upload-track" type="hidden" name="trackDuration" value="">
+          <div class="div-in-file">
+            <h1>Chọn file nhạc của bạn</h1>
+            <input id="fileOfTrackInTrack" name="fileOfTrack" class="file-of-track" type="file" accept="audio/mp3,audio/*;capture=microphone" > <br>
+          </div>
+          <div class="div-in-image">
+            <h1>Chọn hình cho nhạc của bạn</h1>
+            <input name="imageOfTrack" id="imageFileOfTrack"  class="image-of-track" type="file" accept="image/png, image/gif, image/jpeg" > <br>
+            <img id="imageOfTrack" src="">
+          </div>
+          <input name="trackTitle" id="trackTitleInForm" type="text" placeholder="Tên bài hát (không nhập chữ '&')" required> <br>
+          <select id="genreInForm" name="genre" required>
+            <option th:each="genre:${genreList}" th:text="${genre.name}" th:value="${genre.id}"></option>
+          </select>
+          <input id="userListInForm" name="cooperatorOfTrack" type="email" list="userList-dataList" autocomplete="off" placeholder="Những người hợp tác phân cách bởi dấu ','" multiple> <br>
+          <datalist id="userList-dataList">
+			  <option  th:each="following:${followingList}" th:text="${following.artistName}" th:value="${following.email}"></option>
+		  </datalist>
+          <br>
+          <span>Riêng tư: </span>
+          <label>
+            <input id="havePrivateYes" name="havePrivate" type="radio" value= 1 > Yes
+          </label>
+          <label>
+            <input id="havePrivateNo" name="havePrivate" type="radio" checked value=0> No
+          </label>
+          <br>
+          <button id="button-submit-form-upload" type="submit" class="button-submit-track">Đăng</button>
+          <button id="reset-submit-form-upload" style="margin-left: 20px;" type="reset" class="button-submit-track">Hủy</button>
+        </form>
+      </div>
+		<div id="aa" style="padding-bottom: 50px;"></div>
+    </section>
+    
+    <section id="upload-playlist-by-artist" class="display-music">`
+      <div class="form-upload-playlist">
+		  <h1 style="margin-bottom: 50px;">
+			 	<a id="edit-text-in-upload-playlist-by-artist" style="text-decoration: none; color: blue; cursor: pointer;"ref="#">Nếu bạn muốn chỉnh sửa lại album hoặc danh sách phát thì hãy click vào</a>
+		 </h1>
+		 
+		 <h1 style="margin-bottom: 50px;">
+			 <a id="delete-text-in-upload-playlist-by-artist" style="text-decoration: none; color: red; cursor: pointer;"ref="#">Nếu bạn muốn xóa album hoặc danh sách phát thì hãy click vào</a>
+		 </h1>
+		 
+		<iframe name="iframeAddPlaylist" id="iframeAddPlaylist" style="display: none;" ></iframe>
+        <form id="upload-playlist-form" method="post" enctype="multipart/form-data" th:action="@{/playlists/add}" target="iframeAddPlaylist">
+		  <input  id="id-in-upload-playlist-form" name="id" type="hidden" value="">
+		  <input type="hidden" name="allTrackHaveCheckedInCheckbox" id="allTrackHaveCheckedInCheckbox" value="">
+          <div class="div-in-image">
+            <h1>Chọn hình cho album hoặc danh sách phát</h1>
+            <input name="imageOfPlaylist" id="imageFileOfPlaylist"  class="image-of-playlist" type="file" accept="image/png, image/gif, image/jpeg" > <br>
+            <img id="imageOfPlaylist" src=''>
+          </div>
+          <input name="playlistTitle"  id="playlistTitleInForm" type="text" placeholder="Tên album hoặc danh sách phát (không nhập chữ '&')" required> <br>
+          <br>
+          <span>Tùy chọn: </span>
+          <label>
+            <input id="isAlbumInPlaylist" name="haveAlbum" type="radio" value= 1 checked> Album
+          </label>
+          <label>
+            <input id="isPlaylistInPlaylist" name="haveAlbum" value= 0 type="radio"> Playlist
+          </label>
+          <br>
+          <br>
+          <span>Riêng tư: </span>
+          <label>
+            <input name="havePrivate" id="havePrivateYesInPlaylist" type="radio" value="1"> Yes
+          </label>
+          <label>
+            <input name="havePrivate" id="havePrivateNoInPlaylist" type="radio" checked value="0"> No
+          </label>
+          <br>
+                    
+          <br>
+          <input id="searchTrackInUploadPageOfPlaylist" type="text" placeholder="Tìm kiếm...">
+
+          <div class="div-of-table">
+            <table id="table" class="table" cellspacing="0">
+			  <tr>
+                <th>Ảnh</th>
+                <th>Tên bài hát</th>
+                <th>Thê loại</th>
+                <th>Người Đăng</th>
+                <th>Nghệ sĩ hợp tác</th>
+                <th>Thao tác</th>
+              </tr>
+              <tr id="tr-in-table" style="display: none;">
+                <td id="id-td-image" class="td-image">
+                  <img src="">
+                </td>
+                <td ></td>
+                <td ></td>
+                <td ></td>
+                <td ><a class="artist" href="#"></a></td>
+                <td >
+					<span>Chọn</span> <input class="checkbox" type="checkbox">
+					<input type="hidden" class="hiddenIdOfTrack" value="">
+				</td>
+              </tr>
+            </table>
+          </div>
+
+ 		  <br>
+          <button id="button-submit-of-playlist" type="submit" class="button-submit-playlist">Tạo</button>
+          <button id="reset-submit-form-upload-playlist" style="margin-left: 20px;" type="reset" class="button-submit-playlist">Hủy</button>
+        </form>
+    
+        
+        
+      </div>
+      
+      <div id="aa" style="padding-bottom: 50px;"></div>
+    </section>
+    
+    <section id="page-of-search"  class="display-music">
+
+      <div class="search-div">
+        <button id="button-search-all">Tất cả</button>
+        <button id="button-search-track">Bài Hát</button>
+        <button id="button-search-album">Album</button>
+        <button id="button-search-artist">Nghệ Sĩ</button>
+        <button id="button-search-playlist">Danh sách phát</button>
+      </div>
+  
+      <div id="big-all-track-in-page-of-search" class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+        <div class="title-and-see-all">
+          <h1>
+            Đĩa đơn
+          </h1>
+        </div>
+        <div id="all-track-in-page-of-search" class="grid-playlist-artist-track">
+          <div id="track-in-page-of-search" style="display: none;" class="playlist-artist-track track">
+            <div class="image-of-playlist-track-in-playlist-artist-track">
+              <img src="images/display-music/the-other-albums-tracks/phong-cach.jfif" alt="">
+              <span class="hidden-name-of-playlist">Phong Cách_single_track_page_of_aritst</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Phong Cách</p>
+              <p class="artist-of-playlist-artist-track">
+                <a href="#" class="artist">RPT MCK</a>
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+         
+        </div>
+      </div>
+  
+      <div id="big-all-album-in-page-of-search" class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+        <div class="title-and-see-all">
+          <h1>
+            Album
+          </h1>
+        </div>
+        <div id="all-album-in-page-of-search" class="grid-playlist-artist-track">
+          <div id="album-in-page-of-search" style="display: none;" class="playlist-artist-track album-or-playlist">
+            <div class="image-of-playlist-track-in-playlist-artist-track">
+              <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+              <span class="hidden-name-of-playlist">99%_album_in_page_of_artist</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">99%</p>
+              <p class="artist-of-playlist-artist-track">
+                <a href="#" class="artist">RPT MCK</a>
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div id="big-all-artist-in-page-of-search" class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+        <div class="title-and-see-all">
+          <h1>
+            Nghệ Sĩ
+          </h1>
+        </div>
+        <div id="all-artist-in-page-of-search" class="grid-playlist-artist-track">
+          <div style="display: none;" id="artist-in-page-of-search" class="playlist-artist-track artist">
+            <div class="image-of-artist-in-playlist-artist-track">
+              <img th:src="@{/images/display-music/recently-played/artist/wrxdie-artist.jfif}" alt="">
+              <span class="hidden-name-of-playlist">Wrxdie_artist_in_page_of_artist</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Wrxdie</p>
+              <p class="artist-of-playlist-artist-track">
+                Nghệ sĩ
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+         
+        </div>
+      </div>
+
+      <div id="big-all-playlist-in-page-of-search" class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+        <div class="title-and-see-all">
+          <h1>
+            Danh sách phát
+          </h1>
+        </div>
+        <div id="all-playlist-in-page-of-search" class="grid-playlist-artist-track">
+          <div id="playlist-in-page-of-search" style="display: none;" class="playlist-artist-track album-or-playlist">
+            <div class="image-of-playlist-track-in-playlist-artist-track">
+              <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+              <span class="hidden-name-of-playlist">99%_album_in_page_of_artist</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">99%</p>
+              <p class="artist-of-playlist-artist-track">
+                <a href="#" class="artist">RPT MCK</a>
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div id="aa" style="padding-bottom: 70px;"></div>
+    </section>
+    
+    <a href="#" class="button-play-of-track-in-play-list" style="display: none;">
+	  <i class="fa-solid fa-play"></i>
+	  <audio class="song" id="id-quang-cao">
+	    <source type="audio/mpeg" th:src="@{/file-of-track/Chịu Cách Mình Nói Thua.mp3}">
+	      <span>quang_cao</span>
+	  </audio>
+	</a>
+	
+    <script type="text/javascript" th:src="@{/js/sidebar.js}"></script>
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
+    <script type="text/javascript" th:src="@{/js/listeningHistory_searchHistory.js}"></script>
+    <script type="text/javascript" th:src="@{/js/pageOfArtist.js}"></script>
+    <script type="text/javascript" th:src="@{/js/track.js}"></script>
+    <script type="text/javascript" th:src="@{/js/upload-track-by-artist.js}"></script>
+    <script type="text/javascript" th:src="@{/js/upload-playlist-by-artist.js}"></script>
+    <script type="text/javascript" th:src="@{/js/page-of-track.js}"></script>
+    <script type="text/javascript" th:src="@{/js/page-of-search.js}"></script>
+    <script type="text/javascript" th:src="@{/js/track_libary.js}"></script>
+    <script type="text/javascript" th:src="@{/js/masterPlaylist.js}"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    <div class="notify-success-share" id="notify-success-share" >
+		<p>Chia sẻ thành công</p>
+	</div>
+	
+	<div class="confirm-share" id="confirm-share-playlist" style="display: none;">
+		<input type="text" id="message-share-playlist" placeholder="Nhập lời bạn muốn share (không nhập dấu &)" style="padding: 10px 15px;">
+		<button id="confirm-yes-playlist">Chia sẻ</button>
+		<button  id="confirm-no-playlist">Hủy</button>
+	</div>
+	
+	<div class="confirm-share" id="confirm-share-track" style="display: none;">
+		<input type="text" id="message-share-track" placeholder="Nhập lời bạn muốn share (không nhập dấu &)" style="padding: 10px 15px;">
+		<button id="confirm-yes-track">Chia sẻ</button>
+		<button  id="confirm-no-track">Hủy</button>
+	</div>
+
+  </body>
+</html>

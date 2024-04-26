@@ -1,0 +1,339 @@
+/* Sidebar */
+.sidebar {
+  background-color: black;
+  position: fixed;
+  top: 100px;
+  left: 0;
+  width: 330px;
+  /* 600px khi mở thêm */
+  bottom: 0;
+  z-index: 1;
+  padding: 0 10px;
+}
+
+.sidebar i {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 20px;
+}
+
+.sidebar .top-sidebar .top-sidebar-link span{
+  margin-right: 10px;
+}
+
+.sidebar .top-sidebar .top-sidebar-link .fa-magnifying-glass{
+  margin-right: 4px;
+}
+
+.sidebar .top-sidebar {
+  background-color: rgb(18, 18, 18);
+  padding: 20px 30px;
+  border-radius: 10px;
+}
+
+.sidebar .top-sidebar ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.sidebar .top-sidebar-link {
+  display: flex;
+  position: relative;
+}
+
+.sidebar .top-sidebar-link a{
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: bold;
+  flex: 1;
+}
+
+.sidebar .top-sidebar li {
+  padding: 15px 0;
+}
+
+.sidebar .top-sidebar .top-sidebar-link a:hover{
+  transition: color 0.5s;
+  color: white;
+}
+
+.sidebar .top-sidebar .top-sidebar-link a:hover i{
+  transition: color 0.5s;
+  color: white;
+}
+
+.bottom-sidebar {
+  background-color: rgb(18, 18, 18);
+  height: 72%;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding-bottom: 10px;
+}
+
+.flex-bottom-sidebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+}
+
+.hover-create-playlist {
+  position: absolute;
+  background-color: rgb(39, 37, 37);
+  top: -40px;
+  right: -50px;
+  left: -50px;
+  text-align: center;
+  padding: 7px 10px;
+  color: white;
+  border-radius: 5px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sidebar .top-sidebar-link a:hover i{
+  transition: color 0.5s;
+  color: white;
+}
+
+.sidebar .top-sidebar-link a:hover {
+  transition: color 0.5s;
+  color: white;
+}
+
+.sidebar .bottom-sidebar a:hover ~ .hover-create-playlist{
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity 0.5s;
+}
+
+.hover-read-more {
+  position: absolute;
+  background-color: rgb(39, 37, 37);
+  top: -40px;
+  right: -30px;
+  left: 0px;
+  text-align: center;
+  padding: 7px 10px;
+  color: white;
+  border-radius: 5px;
+  font-size: 14px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+}
+
+.fa-arrow-right {
+  cursor: pointer;
+}
+
+.sidebar .bottom-sidebar .fa-arrow-right:hover ~ .hover-read-more {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.sidebar .bottom-sidebar .fa-arrow-right:hover{
+  color: white;
+  transition: color 0.5s;
+}
+
+.fa-arrow-right {
+  margin-left: 25px;
+}
+
+.filter-in-libary {
+  padding: 10px 10px;
+  text-align: center;
+}
+
+.fa-book-open {
+  margin-right: 10px;
+}
+
+.filter-in-libary a{
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding:8px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  background-color: rgba(47, 46, 46, 0.993);
+  margin-right: 5px;
+}
+
+.filter-in-libary a:hover {
+  background-color: rgba(75, 73, 73, 0.993);
+  transition: background-color 0.3s;
+}
+
+.search-in-libary {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  padding: 0px 30px;
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.hover-search-in-libary {
+  position: absolute;
+  width: 200px;
+  font-size: 14px;
+  border-radius: 5px;
+  background-color: rgb(39, 37, 37);
+  text-align: center;
+  pointer-events: none;
+  color: white;
+  padding: 10px 10px;
+  top: -50px;
+  opacity: 0;
+}
+
+#i-search-libary {
+  cursor: pointer;
+  font-size: 15px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#i-search-libary:hover {
+  background-color: rgba(75, 73, 73, 0.993);
+}
+
+#i-search-libary:hover ~ .hover-search-in-libary {
+  opacity: 1;
+  transition: opacity 0.5s;
+  pointer-events: all;
+}
+
+#input-search-libary, #input-search-track-album-playlist-artist {
+  width: 0px;
+  border: none;
+  padding: 10px 15px;
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(75, 73, 73, 0.993);
+  pointer-events: none;
+  opacity: 0;
+  margin-left: 5px;
+  border-radius: 5px;
+  outline: none;
+}
+
+#input-search-libary::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+}
+
+#input-search-track-album-playlist-artist::placeholder{
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 13px;
+}
+
+.search-recently{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: 10px;
+  width: 100px;
+}
+
+.search-recently span{
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s color, font-size 0.2s;
+}
+
+.search-recently span:hover {
+  color: white;
+  font-size: 15px;
+}
+
+.search-recently span:hover i{
+  color: white;
+  font-size: 15px;
+}
+
+.search-recently i{
+  font-size: 14px;
+  transition: 0.2s color, font-size 0.2s;
+  margin-left: 3px;
+}
+
+/* Music in libary */
+.all-track-playList-artist-in-libary {
+  margin-top: 10px;
+  padding: 5px 7px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 250px;
+  transition: background-color 8s;
+}
+
+.all-track-playList-artist-in-libary::-webkit-scrollbar  {
+  background-color: rgb(18, 18, 18);
+  width: 10px;
+}
+
+.all-track-playList-artist-in-libary::-webkit-scrollbar-thumb {
+  background: rgba(75, 73, 73, 0.993);
+  border-radius: 10px;
+}
+
+/* .all-track-playList-artist-in-libary:hover::-webkit-scrollbar-thumb {
+  background: rgba(75, 73, 73, 0.993);
+} */
+
+.track-playList-artist-in-libary {
+  display: flex;
+  align-items: center;
+  transition: background-color 0.15s;
+  cursor: pointer;
+  padding: 7px 10px;
+  border-radius: 5px;
+}
+
+.track-playList-artist-in-libary:hover {
+  background-color: rgba(30, 28, 28, 0.993);
+}
+
+.image-of-artist img {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.image-of-playList-track img{
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+
+.name-of-artist {
+  color: white;
+  font-weight: 500;
+  margin-bottom: 5px;
+  white-space:nowrap; 
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 230px;
+  font-size: 16px;
+}
+
+.role-of-track-playList {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- lỗi GET http://127.0.0.1:5500/favicon.ico 404 (Not Found)
+          được fix bằng phía dưới
+     -->
+    <link rel="shortcut icon" href="#"> 
+
+    <title>Music Web</title>
+    <link rel="stylesheet" type="text/css" href="styles/general.css" />
+    <link rel="stylesheet" type="text/css" href="styles/header.css" />
+    <link rel="stylesheet" type="text/css" href="styles/sidebar.css" />
+    <link rel="stylesheet" type="text/css" href="styles/index.css" />
+    <link rel="stylesheet" type="text/css" href="styles/pageOfPlayList.css" />
+    <link rel="stylesheet" type="text/css" href="styles/page-of-artist.css" />
+    <link rel="stylesheet" type="text/css" href="styles/page-of-track.css" />
+    <link rel="stylesheet" type="text/css" href="styles/upload-track-by-artist.css" />
+    <link rel="stylesheet" type="text/css" href="styles/search.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="left-header">
+        <div class="display-image-of-track-playlist" >
+          <a href="#">
+            <img id="image-of-track-playlist" src="#" alt="">
+          </a>
+        </div>
+        <div id="info-of-track-artist" class="info-of-track-artist">
+          <div id="all-display-name-of-track" class="all-display-name-of-track">
+            <a href="#" id="display-name-of-track"></a>
+          </div>
+          <div id="all-display-name-of-artist">
+          </div>
+        </div>
+        <div id="heart-save-to-libary">
+          <a href="#">
+            <i class="fa-regular fa-heart"></i>
+          </a>
+        </div>
+      </div>
+      <div class="middle-header">
+        <div class="all-button-for-play">
+          <button>
+            <i class="fa-solid fa-shuffle"></i>
+          </button>
+          <button>
+            <i class="fa-solid fa-backward"></i>
+          </button>
+          <button class="button-play-music">
+            <i class="fa-solid fa-play" id="icon-play-track"></i>
+          </button>
+          <button>
+            <i class="fa-solid fa-forward"></i>
+          </button>
+          <button>
+            <i class="fa-solid fa-repeat"></i>
+          </button>
+        </div>
+        <div class="duration-header">
+          <span id="start-duration"></span>
+          <input type="range" value="0" id="progress">
+          <span id="end-duration"></span>
+        </div>
+      </div>
+      <div class="volume-div">
+        <i id="volume-icon" class="fa-solid fa-volume-high"></i>
+        <input type="range" min="0" max="1" step="0.01" value="1" id="volume-input">
+      </div>
+      <div class="right-header">
+        <button>
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <button class="sign-up">
+          <a >Đăng ký</a>
+        </button>
+        <button class="sign-in">
+          <a >Đăng nhập</a>
+        </button>
+      </div>
+    </header> 
+
+    <nav class="sidebar">
+      <div class="top-sidebar">
+        <ul>
+          <li>
+            <div class="top-sidebar-link">
+              <a href="#" id="redirect-to-index">
+                <span><i class="fa-solid fa-house"></i>
+                </span>Trang chủ</a>
+            </div>
+          </li>
+          <li>
+            <div class="top-sidebar-link">
+              <a href="#">
+                <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                Tìm kiếm
+              </a>
+          </li>
+        </ul>
+      </div>
+      <div class="bottom-sidebar">
+        <div class="flex-bottom-sidebar">
+          <div class="top-sidebar-link">
+            <a href="#">
+              <span><i class="fa-solid fa-book-open"></i></span>
+              Thư viện
+            </a>
+          </div>
+          <div class="top-sidebar-link">
+            <a href="#">
+              <i class="fa-solid fa-plus"></i>
+            </a>
+            <i class="fa-solid fa-arrow-right"></i>
+            <div class="hover-create-playlist">Tạo danh sách phát</div>
+            <div class="hover-read-more">Xem thêm</div>
+          </div>
+        </div>
+        <div class="filter-in-libary">
+          <a href="#">Playlist</a>
+          <a href="#">Nghệ sĩ</a>
+          <a href="#">Album</a>
+        </div>
+        <div class="search-in-libary">
+            <div class="search-input">
+              <i id="i-search-libary" class="fa-solid fa-magnifying-glass"></i>
+              <input id="input-search-libary" placeholder="Tìm trong thư viện" type="text">
+              <div id="hover-search-in-libary" class="hover-search-in-libary">
+                Tìm kiếm trong thư viện
+              </div>
+            </div>
+            <div class="search-recently">
+              <span>Gần đây <i class="fa-solid fa-list"></i></span>
+            </div>
+        </div>
+        <div class="all-track-playList-artist-in-libary">
+          <div class="track-playList-artist-in-libary">
+            <div class="image-of-artist"> 
+              <img src="images/libary/artist/wren-evans.jfif" alt="">
+            </div>
+            <div class="info-artist">
+              <p class="name-of-artist">Wren Evans</p>
+              <p class="role-of-track-playList">Nghệ sĩ</p>
+            </div>
+          </div>
+          <div class="track-playList-artist-in-libary">
+            <div class="image-of-playList-track">
+              <img src="images/libary/playlist/wren-evans-radio" alt="">
+            </div>
+            <div class="info-artist">
+              <p class="name-of-artist">Wren Evans Radio</p>
+              <p class="role-of-track-playList">Danh sách phát<span> • Spotify</span></p>
+            </div>
+          </div>
+          <div class="track-playList-artist-in-libary">
+            <div class="image-of-playList-track">
+              <img src="images/libary/playlist/hot-hit-vn.jfif" alt="">
+            </div>
+            <div class="info-artist">
+              <p class="name-of-artist">Hot Hits Vietnam</p>
+              <p class="role-of-track-playList">Danh sách phát<span> • Spotify</span></p>
+            </div>
+          </div>
+          <div class="track-playList-artist-in-libary">
+            <div class="image-of-playList-track">
+              <img src="images/libary/playlist/album-loi-choi.jfif" alt="">
+            </div>
+            <div class="info-artist">
+              <p class="name-of-artist">LOI CHOI: The Neo Pop Punk</p>
+              <p class="role-of-track-playList">Album<span> • Wren Evans</span></p>
+            </div>
+          </div>
+          <div class="track-playList-artist-in-libary">
+            <div class="image-of-playList-track">
+              <img src="images/libary/playlist/mew.jfif" alt="">
+            </div>
+            <div class="info-artist">
+              <p class="name-of-artist">My Playlist #1</p>
+              <p class="role-of-track-playList">Danh sách phát<span> • Ho Khanh</span></p>
+            </div>
+          </div>
+          <div class="track-playList-artist-in-libary">
+            <div class="image-of-playList-track">
+              <img src="images/libary/playlist/bai-hat-da-thich.png" alt="">
+            </div>
+            <div class="info-artist">
+              <p class="name-of-artist">Bài hát đã thích</p>
+              <p class="role-of-track-playList">Danh sách phát<span> • 4 bài hát</span></p>
+            </div>
+          </div>
+          <div class="track-playList-artist-in-libary">
+            <div class="image-of-playList-track">
+              <img src="images/libary/playlist/discovery-weekly.jfif" alt="">
+            </div>
+            <div class="info-artist">
+              <p class="name-of-artist">Discover Weekly</p>
+              <p class="role-of-track-playList">Danh sách phát<span> • Spotify</span></p>
+            </div>
+          </div>
+          <div class="track-playList-artist-in-libary">
+            <div class="image-of-playList-track">
+              <img src="images/libary/playlist/tuyen-tap-gducky.jfif" alt="">
+            </div>
+            <div class="info-artist">
+              <p class="name-of-artist">Tuyển tập của GDucky</p>
+              <p class="role-of-track-playList">Danh sách phát<span> • Spotify</span></p>
+            </div>
+          </div>
+          <div class="track-playList-artist-in-libary">
+            <div class="image-of-playList-track">
+              <img src="images/libary/playlist/daily-mix-2.jfif" alt="">
+            </div>
+            <div class="info-artist">
+              <p class="name-of-artist">Daily Mix 2</p>
+              <p class="role-of-track-playList">Danh sách phát<span> • Spotify</span></p>
+            </div>
+          </div>
+        </div>  
+      </div>
+    </nav>
+
+    <section  class="display-music">
+
+      <div class="search-div">
+        <button>Tất cả</button>
+        <button>Bài Hát</button>
+        <button>Album</button>
+        <button>Nghệ Sĩ</button>
+        <button>Danh sách phát</button>
+      </div>
+      
+      
+  
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+        <div class="title-and-see-all">
+          <h1>
+            Đĩa đơn
+          </h1>
+        </div>
+        <div class="grid-playlist-artist-track">
+          <div class="playlist-artist-track track">
+            <div class="image-of-playlist-track-in-playlist-artist-track">
+              <img src="images/display-music/the-other-albums-tracks/phong-cach.jfif" alt="">
+              <span class="hidden-name-of-playlist">Phong Cách_single_track_page_of_aritst</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Phong Cách</p>
+              <p class="artist-of-playlist-artist-track">
+                <a href="#" class="artist">RPT MCK</a>
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+          <div class="playlist-artist-track track">
+            <div class="image-of-playlist-track-in-playlist-artist-track">
+              <img src="images/display-music/the-other-albums-tracks/buon-hay-vui.jfif" alt="">
+              <span class="hidden-name-of-playlist">Buồn Hay Vui(feat.RPT MCK, Obito, Ronboogz & Boyzed)_single_track_page_of_aritst</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Buồn Hay Vui(feat.RPT MCK, Obito, Ronboogz & Boyzed)</p>
+              <p class="artist-of-playlist-artist-track">
+                <a href="#" class="artist">VSOUL</a>,
+                <a href="#" class="artist">RPT MCK</a>,
+                <a href="#" class="artist">Obito</a>,
+                <a href="#" class="artist">Ronboogz</a>,
+                <a href="#" class="artist">Boyzed</a>
+              </p>
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+          <div class="playlist-artist-track track">
+            <div class="image-of-playlist-track-in-playlist-artist-track">
+              <img src="images/display-music/the-other-albums-tracks/chim-sau.jfif" alt="">
+              <span class="hidden-name-of-playlist">Chìm Sâu_single_track_page_of_aritst</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Chìm Sâu</p>
+              <p class="artist-of-playlist-artist-track">
+                <a href="#" class="artist">RPT MCK</a>,
+                <a href="#" class="artist">Trung Trần</a>
+              </p>
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+          <div class="playlist-artist-track track">
+            <div class="image-of-playlist-track-in-playlist-artist-track">
+              <img src="images/display-music/the-other-albums-tracks/tai-vi-sao.jfif" alt="">
+              <span class="hidden-name-of-playlist">Tại Vì Sao_single_track_page_of_aritst</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Tại Vì Sao</p>
+              <p class="artist-of-playlist-artist-track">
+                <a href="#" class="artist">Tại Vì Sao</a>
+              </p>
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>  
+          <div class="playlist-artist-track track">
+            <div class="image-of-playlist-track-in-playlist-artist-track">
+              <img src="images/display-music/the-other-albums-tracks/khong-can-co.jfif" alt="">
+              <span class="hidden-name-of-playlist">Không Cần Cố_single_track_page_of_aritst</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Không Cần Cố</p>
+              <p class="artist-of-playlist-artist-track">
+                <a href="#" class="artist">RPT MCK</a>,
+                <a href="#" class="artist">tlinh</a>
+              </p>
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+  
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+        <div class="title-and-see-all">
+          <h1>
+            Album
+          </h1>
+        </div>
+        <div class="grid-playlist-artist-track">
+          <div class="playlist-artist-track album-or-playlist">
+            <div class="image-of-playlist-track-in-playlist-artist-track">
+              <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+              <span class="hidden-name-of-playlist">99%_album_in_page_of_artist</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">99%</p>
+              <p class="artist-of-playlist-artist-track">
+                <a href="#" class="artist">RPT MCK</a>
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+        <div class="title-and-see-all">
+          <h1>
+            Nghệ Sĩ
+          </h1>
+        </div>
+        <div class="grid-playlist-artist-track">
+          <div class="playlist-artist-track artist">
+            <div class="image-of-artist-in-playlist-artist-track">
+              <img src="images/display-music/recently-played/artist/wrxdie-artist.jfif" alt="">
+              <span class="hidden-name-of-playlist">Wrxdie_artist_in_page_of_artist</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Wrxdie</p>
+              <p class="artist-of-playlist-artist-track">
+                Nghệ sĩ
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+          <div class="playlist-artist-track artist">
+            <div class="image-of-artist-in-playlist-artist-track">
+              <img src="images/display-music/popular-albums/danh-doi-obito.jfif" alt="">
+              <span class="hidden-name-of-playlist">Obito_artist_in_page_of_artist</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Obito</p>
+              <p class="artist-of-playlist-artist-track">
+                Nghệ sĩ
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+          <div class="playlist-artist-track artist">
+            <div class="image-of-artist-in-playlist-artist-track">
+              <img src="images/display-music/fan-also-like-artist/low-g.jfif" alt="">
+              <span class="hidden-name-of-playlist">Low G_artist_in_page_of_artist</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Low G</p>
+              <p class="artist-of-playlist-artist-track">
+                Nghệ sĩ
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+          <div class="playlist-artist-track artist">
+            <div class="image-of-artist-in-playlist-artist-track">
+              <img src="images/display-music/popular-artists/tlinh.jfif" alt="">
+              <span class="hidden-name-of-playlist">tlinh_artist_in_page_of_artist</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">tlinh</p>
+              <p class="artist-of-playlist-artist-track">
+                Nghệ sĩ
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+          <div class="playlist-artist-track artist">
+            <div class="image-of-artist-in-playlist-artist-track">
+              <img src="images/display-music/fan-also-like-artist/nger.jfif" alt="">
+              <span class="hidden-name-of-playlist">Nger_artist_in_page_of_artist</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Nger</p>
+              <p class="artist-of-playlist-artist-track">
+                Nghệ sĩ
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+        <div class="title-and-see-all">
+          <h1>
+            Danh sách phát
+          </h1>
+        </div>
+        <div class="grid-playlist-artist-track">
+          <div class="playlist-artist-track album-or-playlist">
+            <div class="image-of-playlist-track-in-playlist-artist-track">
+              <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+              <span class="hidden-name-of-playlist">99%_album_in_page_of_artist</span>
+            </div>
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">99%</p>
+              <p class="artist-of-playlist-artist-track">
+                <a href="#" class="artist">RPT MCK</a>
+              </p>  
+            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+  
+     
+  
+      
+      
+      <div id="aa" style="padding-bottom: 70px;"></div>
+    </section>
+
+    <script src="js/sidebar.js"></script>
+  </body>
+</html>

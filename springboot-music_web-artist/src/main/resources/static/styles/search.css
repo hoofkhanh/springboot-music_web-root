@@ -1,0 +1,23 @@
+.search-div {
+  position: fixed;
+  z-index: 1;
+}
+
+.search-div button{
+  background-color: rgb(34, 33, 33);
+  color: white;
+  padding: 10px 20px;
+  margin: 10px 10px;
+  border-radius: 50px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.search-div button:hover {
+  background-color: rgb(50, 48, 48);
+}
+
+.search-div button:active {
+  transform: scale(1.05);
+}

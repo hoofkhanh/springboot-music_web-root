@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đổi mật khẩu</title>
+  <link rel="stylesheet" type="text/css" href="styles/login.css" />
+
+</head>
+<body>
+  <div class="all-form-login">
+    <h1>Đổi mật khẩu</h1>
+    
+    <p th:if="${notification != null}" style="color: yellow; text-align: center; margin-top: 10px;" th:text="${notification}"></p>
+    
+    <form th:action="@{/changePassword/conductChange}" method="post">
+	    <div class="input-div">
+	      <label>Email</label>
+	      <input th:value="${email}" type="email" name="email" required>
+	    </div>
+	
+	    <div class="input-div">
+	      <label>Mật khẩu cũ</label>
+	      <input th:value="${oldPassword}" type="password" autocomplete="on" name="oldPassword" required>
+	    </div>
+	
+	    <div class="input-div">
+	      <label>Mật khẩu mới</label>
+	      <input th:value="${newPassword}" type="password" autocomplete="on" name="newPassword" required>
+	    </div>
+	
+	    <div class="button-div">
+	      <button>Xác nhận</button>
+	    </div>
+	</form>
+    <div class="a-div">
+      <a th:href="@{/login}">Đăng nhập</a>
+    </div>
+
+    <div class="a-div">
+      <a th:href="@{/register}">Đăng kí</a>
+    </div>
+    
+  </div>
+</body>
+</html>

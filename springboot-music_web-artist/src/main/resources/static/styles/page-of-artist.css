@@ -1,0 +1,102 @@
+#button-follow{
+  text-decoration: none;
+  color: white;
+  padding: 10px 30px;
+  border: 1px solid white;
+  transition: transform 0.15;
+  display: inline-block;
+  margin: 13px 0px;
+}
+
+#button-follow:hover {
+  transform: scale(1.03);
+}
+
+.display-music-of-playlist .popular-h2{
+  margin: 15px 5px;
+}
+
+ #button-play-in-artist{
+  padding: 15px 20px;
+  border-radius: 50px;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(241, 18, 18, 0.995);
+  color: rgb(255, 255, 255);
+  transition: transform 0.15s;
+  display: inline-block;
+}
+
+#button-play-in-artist:hover {
+  transform: scale(1.1);
+  filter: brightness(150%);
+}
+
+#button-play-in-artist:active{
+  opacity: 0.8;
+  transform: scale(0.95);
+} 	
+
+#div-change-image-in-profile {
+	position: absolute;
+	bottom: 0;
+	right: -600px;
+	left: -80px;
+	top: -50px;
+	background-color: rgb(63, 63, 63);
+	margin-left: 300px;
+	width: 300px;
+	height: 80px;
+	display: none;
+}
+
+#change-image-in-profile::file-selector-button
+{
+      font-size: 12px;
+      font-weight: bold;
+      color: #fff;
+      background-color: rgb(221, 28, 28);
+      border: 1px solid rgb(221, 28, 28);
+      border-radius: 5px;
+      cursor: pointer;
+      padding: 8px;
+}
+
+#div-change-image-in-profile .submitChangeImage::file-selector-button{
+      font-size: 12px;
+      font-weight: bold;
+      color: #fff;
+      background-color: rgb(221, 28, 28) !important;
+      border: 1px solid rgb(221, 28, 28);
+      border-radius: 5px;
+      cursor: pointer;
+      padding: 8px;
+}
+
+.submitChangeImage, .closeChangeImage {
+  width: 100px;
+  height: 40px;
+  margin: 10px 0;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 10px 0;
+}
+
+/*#button-save-to-libary-page-of-artist {
+  font-size: 45px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+  display: inline-block;
+  transition: transform 0.15s;
+}
+
+#button-save-to-libary-page-of-artist:hover {
+  transform: scale(1.1);
+  filter: brightness(150%);
+}
+
+#button-save-to-libary-page-of-artist:active{
+  opacity: 0.8;
+  transform: scale(0.95);
+}*/

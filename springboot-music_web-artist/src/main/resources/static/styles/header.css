@@ -1,0 +1,411 @@
+/* Header */
+.header {
+  padding: 0 20px;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  margin: auto;
+  font-size: 14px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+
+.header i {
+  font-size: 15px;
+  cursor: pointer;
+  transition: color 0.15s, transform 0.1s;
+}
+
+.header button{
+  background-color: rgb(0,0,0);
+  color: rgba(255, 255, 255, 0.7);
+  border: none;
+  padding: 0 15px;
+}
+
+.header .button-play-music i{
+  font-size: 27px;
+  border-radius: 5px;
+  background-color: white;
+  padding: 7px 12px;
+  color: black;
+  width: 20px;
+}
+
+.header .right-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .sign-in {
+  padding: 10px 20px;
+  background-color: white;
+  color: black;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: opacity 0.15s, transform 0.15s;
+  cursor: pointer;
+}
+
+.header .sign-up {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  transition: color 0.15s;
+}
+
+.header .sign-up a{
+  cursor: pointer;
+}
+
+.header i:hover{
+  color: white;
+}
+
+.header .button-play-music i:hover{
+  color: black;
+  opacity: 0.8;
+}
+
+.header i:active{
+  transform: scale(1.2);
+}
+
+.sign-up a:hover{
+  color: white;
+}
+
+.sign-in:hover{
+  opacity: 0.8;
+}
+
+.sign-in:active{
+  transform: scale(1.1);
+}
+
+/* duration-header */
+.duration-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* width: 300px; */
+}
+
+#start-duration {
+  margin-right: 20px;
+  width: 28px;
+  height: 18px;
+}
+
+#end-duration {
+  margin-left: 20px;
+  width: 28px;
+  height: 18px;
+}
+
+#progress {
+  -webkit-appearance: none !important;
+  width: 100%;
+  height: 5px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.7);
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+#progress::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background-color: rgba(241, 18, 18, 0.995);
+  cursor: pointer;
+  /* opacity: 0; */
+  /* pointer-events: none; */
+  transition: opacity 0.2;
+}
+
+/* #progress:hover::-webkit-slider-thumb {
+  opacity: 1;
+  pointer-events: all;
+} */
+
+/* Left header */
+.left-header {
+  width: 300px;
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  
+}
+
+
+.display-image-of-track-playlist img{
+  width: 70px;
+}
+
+.info-of-track-artist {
+  margin-left: 15px;
+  overflow: hidden;
+}
+
+.info-of-track-artist #display-name-of-track {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  padding: 3px 0;
+  white-space: nowrap;
+}
+
+.info-of-track-artist #display-name-of-track:hover {
+  text-decoration: underline;
+}
+
+.info-of-track-artist #all-display-name-of-artist {
+  margin-top: 5px;
+  white-space: nowrap;
+}
+
+.info-of-track-artist #all-display-name-of-artist .display-name-of-artist {
+  color: rgb(179, 179, 179);
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.info-of-track-artist #all-display-name-of-artist .display-name-of-artist:hover {
+  text-decoration: underline;
+  color: white;
+
+}
+
+.class-for-runNameOfArtist {
+  white-space: nowrap;
+}
+
+.class-for-runNameOfArtist:hover {
+  animation-play-state: paused; 
+  animation: runNameOfArtist 20s linear infinite;
+}
+
+@keyframes runNameOfArtist {
+  0%{
+    transform: translateX(0);
+  }
+  
+  2%{
+    transform: translateX(0);
+  }
+
+  50%, 70% {
+      transform: translateX(-100%);
+  }
+
+  70%, 100%{
+    transform: translateX(0%);
+  }
+} 
+
+/* hear add to libary */
+
+#heart-save-to-libary {
+  display: none;
+  margin-left: 20px;
+}
+
+#heart-save-to-libary a {
+  color: white;
+}
+
+/* Volume */
+.middle-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.all-button-for-play {
+  margin-bottom: 15px;
+}
+
+.volume-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#volume-icon {
+  margin-right: 10px;
+  width: 20px;
+  height: 16px ;
+}
+
+/* Music Queue */
+.button-queue-tracks {
+  position: relative;
+}
+
+#queue-tracks {
+  position: absolute;
+  left: -230px;
+  right: -210px;
+  /* top: 62px; */
+  /* bottom: -630px; */
+  top: -100px;
+  bottom: 100px;
+  background-color: lightgray;
+  cursor: default;
+  overflow: scroll;
+  overflow-x: hidden;
+  color: rgb(51, 51, 51);
+  padding: 10px 0;
+  transition: top 0.5s, bottom 0.5s;
+  box-shadow: 0 0 10px rgba(0, 0,0 , 0.7);
+  border: none;
+  z-index: 2;
+}
+
+#queue-tracks::-webkit-scrollbar {
+  width: 10px;
+  background-color: rgb(18, 18, 18);
+}
+
+#queue-tracks::-webkit-scrollbar-thumb{
+  background: rgba(75, 73, 73, 0.993);
+  border-radius: 10px;
+}
+
+#queue-tracks h2 {
+  margin: 10px;
+  
+}
+
+#queue-tracks .info-of-track-artist-in-page-playlist  {
+  flex: 6;
+  width: auto;
+  text-align: left;
+}
+
+#queue-tracks .info-of-track-artist-in-page-playlist .name-of-track-artist-in-page-playlist a{
+  margin-left: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(64, 60, 60);
+}
+
+#queue-tracks .info-of-track-artist-in-page-playlist .name-of-track-artist-in-page-playlist .name-of-artists-in-page-playlist a{
+  color: rgb(68, 66, 66);
+  font-weight: 500;
+}
+
+
+#queue-tracks .info-of-track-artist-in-page-playlist .name-of-track-artist-in-page-playlist{
+  margin-left: 10px;
+}
+
+#queue-tracks .info-of-track-artist-in-page-playlist .image-of-track-artist-in-page-playlist{
+  width: 30px;
+  position: relative;
+  height: 30px;
+}
+
+#queue-tracks .info-of-track-artist-in-page-playlist .image-of-track-artist-in-page-playlist img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+#queue-tracks .time-of-track-artist-in-page-playlist {
+  width: auto;
+}
+
+#queue-tracks .time-of-track-artist-in-page-playlist span {
+  font-size: 12px;
+  color: rgb(51, 51, 51);
+}
+
+#queue-tracks .track-in-playlist{
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  padding: 10px;
+  align-items: center;
+  transition: background-color 0.15s;
+  border-radius: 10px;
+}
+
+#queue-tracks .track-in-playlist:hover {
+  background-color: rgb(184, 179, 179);
+}
+
+#queue-tracks .track-in-playlist .button-play-of-track-in-play-list {
+  position: absolute;
+  top: 22%;
+  left: 37%;
+}
+
+#queue-tracks .track-in-playlist .button-play-of-track-in-play-list i{
+  font-size: 13px;
+}
+
+.active-music {
+  background-color: rgb(184, 179, 179);
+}
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: 150px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 0;
+  left: -300px;
+  bottom: -240px;
+  top: 20px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: rgb(47, 47, 47);}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: crimson;}
+
+
+

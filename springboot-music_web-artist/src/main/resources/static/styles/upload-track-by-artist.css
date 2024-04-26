@@ -1,0 +1,81 @@
+.form-upload-track {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.form-upload-track input[type='text'],input[type='email'], select {
+  width: 400px;
+  height: 22px;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.form-upload-track input[type='file'] {
+  width: 423px;
+  height: 22px;
+  margin: 10px 0;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 10px 0;
+}
+
+.form-upload-track select {
+  width: 423px;
+  height: 47px;
+  margin-bottom: 20px;
+}
+
+.form-upload-track .file-of-track::file-selector-button{
+      font-size: 15px;
+      font-weight: bold;
+      color: #fff;
+      background-color: rgb(221, 28, 28);
+      border: 1px solid rgb(221, 28, 28);
+      border-radius: 5px;
+      cursor: pointer;
+      padding: 10px;
+}
+
+.form-upload-track .image-of-track::file-selector-button{
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+  background-color: rgb(221, 28, 28);
+  border: 1px solid rgb(221, 28, 28);
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.form-upload-track label{
+  margin: 0 15px;
+}
+
+.form-upload-track .div-in-file, .form-upload-track .div-in-image{
+  margin-bottom: 20px;
+}
+
+.button-submit-track {
+  padding: 15px 60px;
+  margin-top: 25px;
+  background-color: rgb(221, 28, 28);
+  font-size: 16px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.15s	;
+}
+
+.button-submit-track:active{
+	transform: scale(0.98);
+}
+
+.div-in-image img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}

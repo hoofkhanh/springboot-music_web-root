@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="shortcut icon" href="#"> 
+
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+  <title>Music Web</title>
+  <link rel="stylesheet" type="text/css" href="styles/general.css" />
+  <link rel="stylesheet" type="text/css" href="styles/header.css" />
+  <link rel="stylesheet" type="text/css" href="styles/sidebar.css" />
+  <link rel="stylesheet" type="text/css" href="styles/index.css" />
+  <link rel="stylesheet" type="text/css" href="styles/pageOfPlayList.css" />
+  <link rel="stylesheet" type="text/css" href="styles/page-of-artist.css" />
+  <link rel="stylesheet" type="text/css" href="styles/page-of-track.css" />
+  <script src="js/pageOfPlayList.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="left-header">
+      <div class="display-image-of-track-playlist" >
+        <a href="#">
+          <img id="image-of-track-playlist" src="#" alt="">
+        </a>
+      </div>
+      <div id="info-of-track-artist" class="info-of-track-artist">
+        <div id="all-display-name-of-track" class="all-display-name-of-track">
+          <a href="#" id="display-name-of-track"></a>
+        </div>
+        <div id="all-display-name-of-artist">
+        </div>
+      </div>
+      <div id="heart-save-to-libary">
+        <a href="#">
+          <i class="fa-regular fa-heart"></i>
+        </a>
+      </div>
+    </div>
+    <div class="middle-header">
+      <div class="all-button-for-play">
+        <button>
+          <i class="fa-solid fa-shuffle"></i>
+        </button>
+        <button>
+          <i class="fa-solid fa-backward"></i>
+        </button>
+        <button class="button-play-music">
+          <i class="fa-solid fa-play" id="icon-play-track"></i>
+        </button>
+        <button>
+          <i class="fa-solid fa-forward"></i>
+        </button>
+        <button>
+          <i class="fa-solid fa-repeat"></i>
+        </button>
+      </div>
+      <div class="duration-header">
+        <span id="start-duration"></span>
+        <input type="range" value="0" id="progress">
+        <span id="end-duration"></span>
+      </div>
+    </div>
+    <div class="volume-div">
+      <i id="volume-icon" class="fa-solid fa-volume-high"></i>
+      <input type="range" min="0" max="1" step="0.01" value="1" id="volume-input">
+    </div>
+    <div class="right-header">
+      <button class="button-queue-tracks">
+        <i id="i-queue-tracks" class="fa-solid fa-bars"></i>
+        <div id="queue-tracks" class="queue-track-class">
+          <h2>Danh sách phát</h2>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/[SPOTIFY-DOWNLOADER.COM] 00.mp3">
+                        <span>00_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    00
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>0:33</span>
+              </div>
+            </div>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/[SPOTIFY-DOWNLOADER.COM] Chìm Sâu.mp3">
+                        <span>Chìm Sâu_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    Chìm Sâu
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>,
+                    <a href="#">Trung Trần</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>2:36</span>
+              </div>
+            </div>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/[SPOTIFY-DOWNLOADER.COM] Suit & Tie.mp3">
+                        <span>Suit & Tie_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    Suit & Tie
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>,
+                    <a href="#">Hoàng Tôn</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>3:58</span>
+              </div>
+            </div>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/[SPOTIFY-DOWNLOADER.COM] Va Vào Giai Điệu Này.mp3">
+                        <span>Va Vào Giai Điều Này_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    Va Vào Giai Điều Này
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>3:10</span>
+              </div>
+            </div>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/[SPOTIFY-DOWNLOADER.COM] Tối Nay Ta Đi Đâu Nhờ.mp3">
+                        <span>Tối Nay Ta Đi Đâu Nhờ_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    Tối Nay Ta Đi Đâu Nhờ
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>1:44</span>
+              </div>
+            </div>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/[SPOTIFY-DOWNLOADER.COM] Chỉ Một Đêm Nữa Thôi.mp3">
+                        <span>Chỉ Một Đêm Nữa Thôi_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    Chỉ Một Đêm Nữa Thôi
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>,
+                    <a href="#">tlinh</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>2:21</span>
+              </div>
+            </div>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/[SPOTIFY-DOWNLOADER.COM] Thôi Em Đừng Đi.mp3">
+                        <span>Thôi Em Đừng Đi_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    Thôi Em Đừng Đi
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>,
+                    <a href="#">Trung Trần</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>2:53</span>
+              </div>
+            </div>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/50.mp3">
+                        <span>50/50_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    50/50
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>1:00</span>
+              </div>
+            </div>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/[SPOTIFY-DOWNLOADER.COM] Cuốn Cho Anh Một Điếu Nữa Đi.mp3">
+                        <span>Cuốn Cho Anh Một Điếu Nữa Đi_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    Cuốn Cho Anh Một Điếu Nữa Đi
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>3:05</span>
+              </div>
+            </div>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/[SPOTIFY-DOWNLOADER.COM] Show Me Love.mp3">
+                        <span>Show Me Love_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    Show Me Love
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>2:34</span>
+              </div>
+            </div>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/[SPOTIFY-DOWNLOADER.COM] Tại Vì Sao.mp3">
+                        <span>Tại Vì Sao_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    Tại Vì Sao
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>3:22</span>
+              </div>
+            </div>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/[SPOTIFY-DOWNLOADER.COM] Thờ Er.mp3">
+                        <span>Thờ Er_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    Thờ Er
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>1:38</span>
+              </div>
+            </div>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/[SPOTIFY-DOWNLOADER.COM] Ai Mới Là Kẻ Xấu Xa.mp3">
+                        <span>Ai Mới Là Kẻ Xấu Xa_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    Ai Mới Là Kẻ Xấu Xa
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>3:12</span>
+              </div>
+            </div>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/[SPOTIFY-DOWNLOADER.COM] Anh Đã Ổn Hơn.mp3">
+                        <span>Anh Đã Ổn Hơn_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    Anh Đã Ổn Hơn
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>3:14</span>
+              </div>
+            </div>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/[SPOTIFY-DOWNLOADER.COM] Badtrip.mp3">
+                        <span>Badtrip_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    Badtrip
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>2:38</span>
+              </div>
+            </div>
+            <div class="track-in-playlist">
+              <div class="info-of-track-artist-in-page-playlist">
+                <div class="image-of-track-artist-in-page-playlist">
+                  <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
+                  <a href="#" class="button-play-of-track-in-play-list">
+                    <i class="fa-solid fa-play"></i>
+                    <audio class="song" >
+                      <source type="audio/mpeg" 
+                        src="audio/popular-album/99-mck/[SPOTIFY-DOWNLOADER.COM] 99.mp3">
+                        <span>99_queue</span>
+                    </audio>
+                  </a>
+                </div>
+                <div class="name-of-track-artist-in-page-playlist" >
+                  <a class="name-of-track-in-page-playlist" href="#">
+                    99
+                  </a>
+                  <p class="name-of-artists-in-page-playlist">
+                    <a href="#">RPT MCK</a>
+                  </p>
+                </div>
+              </div>
+              <div class="time-of-track-artist-in-page-playlist">
+                <span>2:51</span>
+              </div>
+            </div>
+        </div>
+      </button>
+      <button class="sign-up">
+        <a >Đăng ký</a>
+      </button>
+      <button class="sign-in">
+        <a >Đăng nhập</a>
+      </button>
+    </div>
+  </header>  
+
+  <nav class="sidebar">
+    <div class="top-sidebar">
+      <ul>
+        <li>
+          <div class="top-sidebar-link">
+            <a href="#" id="redirect-to-index">
+              <span><i class="fa-solid fa-house"></i>
+              </span>Trang chủ</a>
+          </div>
+        </li>
+        <li>
+          <div class="top-sidebar-link">
+            <a href="#">
+              <span><i class="fa-solid fa-magnifying-glass"></i></span>
+              Tìm kiếm
+            </a>
+        </li>
+      </ul>
+    </div>
+    <div class="bottom-sidebar">
+      <div class="flex-bottom-sidebar">
+        <div class="top-sidebar-link">
+          <a href="#">
+            <span><i class="fa-solid fa-book-open"></i></span>
+            Thư viện
+          </a>
+        </div>
+        <div class="top-sidebar-link">
+          <a href="#">
+            <i class="fa-solid fa-plus"></i>
+          </a>
+          <i class="fa-solid fa-arrow-right"></i>
+          <div class="hover-create-playlist">Tạo danh sách phát</div>
+          <div class="hover-read-more">Xem thêm</div>
+        </div>
+      </div>
+      <div class="filter-in-libary">
+        <a href="#">Playlist</a>
+        <a href="#">Nghệ sĩ</a>
+        <a href="#">Album</a>
+      </div>
+      <div class="search-in-libary">
+          <div class="search-input">
+            <i id="i-search-libary" class="fa-solid fa-magnifying-glass"></i>
+            <input id="input-search-libary" placeholder="Tìm trong thư viện" type="text">
+            <div id="hover-search-in-libary" class="hover-search-in-libary">
+              Tìm kiếm trong thư viện
+            </div>
+          </div>
+          <div class="search-recently">
+            <span>Gần đây <i class="fa-solid fa-list"></i></span>
+          </div>
+      </div>
+      <div class="all-track-playList-artist-in-libary">
+        <div class="track-playList-artist-in-libary">
+          <div class="image-of-artist"> 
+            <img src="images/libary/artist/wren-evans.jfif" alt="">
+          </div>
+          <div class="info-artist">
+            <p class="name-of-artist">Wren Evans</p>
+            <p class="role-of-track-playList">Nghệ sĩ</p>
+          </div>
+        </div>
+        <div class="track-playList-artist-in-libary">
+          <div class="image-of-playList-track">
+            <img src="images/libary/playlist/wren-evans-radio" alt="">
+          </div>
+          <div class="info-artist">
+            <p class="name-of-artist">Wren Evans Radio</p>
+            <p class="role-of-track-playList">Danh sách phát<span> • Spotify</span></p>
+          </div>
+        </div>
+        <div class="track-playList-artist-in-libary">
+          <div class="image-of-playList-track">
+            <img src="images/libary/playlist/hot-hit-vn.jfif" alt="">
+          </div>
+          <div class="info-artist">
+            <p class="name-of-artist">Hot Hits Vietnam</p>
+            <p class="role-of-track-playList">Danh sách phát<span> • Spotify</span></p>
+          </div>
+        </div>
+        <div class="track-playList-artist-in-libary">
+          <div class="image-of-playList-track">
+            <img src="images/libary/playlist/album-loi-choi.jfif" alt="">
+          </div>
+          <div class="info-artist">
+            <p class="name-of-artist">LOI CHOI: The Neo Pop Punk</p>
+            <p class="role-of-track-playList">Album<span> • Wren Evans</span></p>
+          </div>
+        </div>
+        <div class="track-playList-artist-in-libary">
+          <div class="image-of-playList-track">
+            <img src="images/libary/playlist/mew.jfif" alt="">
+          </div>
+          <div class="info-artist">
+            <p class="name-of-artist">My Playlist #1</p>
+            <p class="role-of-track-playList">Danh sách phát<span> • Ho Khanh</span></p>
+          </div>
+        </div>
+        <div class="track-playList-artist-in-libary">
+          <div class="image-of-playList-track">
+            <img src="images/libary/playlist/bai-hat-da-thich.png" alt="">
+          </div>
+          <div class="info-artist">
+            <p class="name-of-artist">Bài hát đã thích</p>
+            <p class="role-of-track-playList">Danh sách phát<span> • 4 bài hát</span></p>
+          </div>
+        </div>
+        <div class="track-playList-artist-in-libary">
+          <div class="image-of-playList-track">
+            <img src="images/libary/playlist/discovery-weekly.jfif" alt="">
+          </div>
+          <div class="info-artist">
+            <p class="name-of-artist">Discover Weekly</p>
+            <p class="role-of-track-playList">Danh sách phát<span> • Spotify</span></p>
+          </div>
+        </div>
+        <div class="track-playList-artist-in-libary">
+          <div class="image-of-playList-track">
+            <img src="images/libary/playlist/tuyen-tap-gducky.jfif" alt="">
+          </div>
+          <div class="info-artist">
+            <p class="name-of-artist">Tuyển tập của GDucky</p>
+            <p class="role-of-track-playList">Danh sách phát<span> • Spotify</span></p>
+          </div>
+        </div>
+        <div class="track-playList-artist-in-libary">
+          <div class="image-of-playList-track">
+            <img src="images/libary/playlist/daily-mix-2.jfif" alt="">
+          </div>
+          <div class="info-artist">
+            <p class="name-of-artist">Daily Mix 2</p>
+            <p class="role-of-track-playList">Danh sách phát<span> • Spotify</span></p>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </nav>
+  
+  <section class="display-music">
+    <div id="background-playlist">
+      <div class="image-info-background-playlist">
+        <div >
+          <img class="avatar" 
+          src="images/display-music/image-in-page-of-track/mai-linh.jfif" 
+          onload="setDynamicBackground()">
+        </div>
+        <div class="info-background-playlist">
+          <h4>Bài hát</h4>
+          <h1>Mai Linh</h1>
+          <div class="important-info-background-playlist">
+            <img src="images/display-music/profile-avatar/rz-mas.jfif" alt="">
+            <a href="#">RZ Mas</a>
+            <span>• 27 tháng 2 năm 2023 </span>
+            <span>• 2 phút 39 giây</span>
+            <span>• 305.590 lượt nghe</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="display-playlist" class="display-playlist">
+      <div class="button-play-saveToLibary">
+        <a href="#" id="button-play-in-track">
+          <i class="fa-solid fa-play"></i>
+        </a>
+        <a id="button-save-to-libary" href="#">
+          <i class="fa-regular fa-heart"></i>
+        </a>
+      </div>
+    </div>
+    
+    <div class="display-music-of-playlist">
+      <h2 class="popular-h2">Phổ biến</h2>
+      <div class="all-music-in-playlist">
+        <div class="track-in-playlist">
+          <div class="info-of-track-artist-in-page-playlist">
+            <img class="avatar-profile" src="images/display-music/profile-avatar/rz-mas.jfif" alt="">
+            <div class="name-of-track-artist-in-page-playlist">
+              <a href="#" class="name-of-track-in-page-playlist">RZ Mas</a>
+              <p class="name-of-artists-in-page-playlist role-artist-in-page-of-track">
+                Nghệ sĩ
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="track-in-playlist">
+          <div class="info-of-track-artist-in-page-playlist">
+            <img class="avatar-profile" src="images/display-music/profile-avatar/24k-right.jfif" alt="">
+            <div class="name-of-track-artist-in-page-playlist">
+              <a href="#" class="name-of-track-in-page-playlist">24K.Right</a>
+              <p class="name-of-artists-in-page-playlist role-artist-in-page-of-track">
+                Nghệ sĩ
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>   
+    </div>
+
+    <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+      <div class="title-and-see-all">
+        <h1>
+          <a href="display-all-track.html">
+            Các bài nhạc thịnh hành của RZ Mas
+          </a>
+        </h1>
+        <h4><a href="#">Hiện tất cả</a></h4>
+      </div>
+      <div class="grid-playlist-artist-track">
+        <div class="playlist-artist-track">
+          <div class="image-of-playlist-track-in-playlist-artist-track">
+            <img src="images/display-music/the-other-albums-tracks/phong-cach.jfif" alt="">
+          </div>
+          <div class="info-artist-in-playlist-artist-track">
+            <p class="name-of-playlist-artist-track">Phong Cách</p>
+            <p class="artist-of-playlist-artist-track">
+              <a href="#">RPT MCK</a>
+            </p>  
+          </div>
+          <a href="#" class="button-play">
+            <i class="fa-solid fa-play"></i>
+            <audio class="song" >
+              <source type="audio/mpeg" 
+                src="audio/the-other-albums-tracks/[SPOTIFY-DOWNLOADER.COM] Phong Cách.mp3">
+              <span>Phong Cách_single_track_of_RZ Mas_page_of_track</span>
+            </audio>
+          </a>
+        </div>
+        <div class="playlist-artist-track">
+          <div class="image-of-playlist-track-in-playlist-artist-track">
+            <img src="images/display-music/the-other-albums-tracks/buon-hay-vui.jfif" alt="">
+          </div>
+          <div class="info-artist-in-playlist-artist-track">
+            <p class="name-of-playlist-artist-track">Buồn Hay Vui(feat.RPT MCK, Obito, Ronboogz & Boyzed)</p>
+            <p class="artist-of-playlist-artist-track">
+              <a href="#">VSOUL</a>,
+              <a href="#">RPT MCK</a>,
+              <a href="#">Obito</a>,
+              <a href="#">Ronboogz</a>,
+              <a href="#">Boyzed</a>
+            </p>
+          </div>
+          <a href="#" class="button-play">
+            <i class="fa-solid fa-play"></i>
+            <audio class="song" >
+              <source type="audio/mpeg" 
+                src="audio/the-other-albums-tracks/[SPOTIFY-DOWNLOADER.COM] Buồn Hay Vui (feat. RPT MCK, Obito, Ronboogz & Boyzed).mp3">
+              <span>Buồn Hay Vui_single_track_of_RZ Mas_page_of_track</span>
+            </audio>
+          </a>
+        </div>
+        <div class="playlist-artist-track">
+          <div class="image-of-playlist-track-in-playlist-artist-track">
+            <img src="images/display-music/the-other-albums-tracks/chim-sau.jfif" alt="">
+          </div>
+          <div class="info-artist-in-playlist-artist-track">
+            <p class="name-of-playlist-artist-track">Chìm Sâu</p>
+            <p class="artist-of-playlist-artist-track">
+              <a href="#">RPT MCK</a>,
+              <a href="#">Trung Trần</a>
+            </p>
+          </div>
+          <a href="#" class="button-play">
+            <i class="fa-solid fa-play"></i>
+            <audio class="song" >
+              <source type="audio/mpeg" 
+                src="audio/the-other-albums-tracks/[SPOTIFY-DOWNLOADER.COM] Chìm Sâu.mp3">
+              <span>Chìm Sâu_single_track_of_RZ Mas_page_of_track</span>
+            </audio>
+          </a>
+        </div>
+        <div class="playlist-artist-track">
+          <div class="image-of-playlist-track-in-playlist-artist-track">
+            <img src="images/display-music/the-other-albums-tracks/tai-vi-sao.jfif" alt="">
+          </div>
+          <div class="info-artist-in-playlist-artist-track">
+            <p class="name-of-playlist-artist-track">Tại Vì Sao</p>
+            <p class="artist-of-playlist-artist-track">
+              <a href="#">Tại Vì Sao</a>
+            </p>
+          </div>
+          <a href="#" class="button-play">
+            <i class="fa-solid fa-play"></i>
+            <audio class="song" >
+              <source type="audio/mpeg" 
+                src="audio/the-other-albums-tracks/[SPOTIFY-DOWNLOADER.COM] Tại Vì Sao.mp3">
+              <span>Tại Vì Sao_single_track_of_RZ Mas_page_of_track</span>
+            </audio>
+          </a>
+        </div>  
+        <div class="playlist-artist-track">
+          <div class="image-of-playlist-track-in-playlist-artist-track">
+            <img src="images/display-music/the-other-albums-tracks/khong-can-co.jfif" alt="">
+          </div>
+          <div class="info-artist-in-playlist-artist-track">
+            <p class="name-of-playlist-artist-track">Không Cần Cố</p>
+            <p class="artist-of-playlist-artist-track">
+              <a href="#">RPT MCK</a>,
+              <a href="#">tlinh</a>
+            </p>
+          </div>
+          <a href="#" class="button-play">
+            <i class="fa-solid fa-play"></i>
+            <audio class="song" >
+              <source type="audio/mpeg" 
+                src="audio/the-other-albums-tracks/[SPOTIFY-DOWNLOADER.COM] Không Cần Cố.mp3">
+                <span>Không Cần Cố_single_track_of_RZ Mas_page_of_track</span>
+            </audio>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+      <div class="title-and-see-all">
+        <h1>
+          <a href="display-all-track.html">
+            Các bài nhạc thịnh hành của 24K.Right
+          </a>
+        </h1>
+        <h4><a href="#">Hiện tất cả</a></h4>
+      </div>
+      <div class="grid-playlist-artist-track">
+        <div class="playlist-artist-track">
+          <div class="image-of-playlist-track-in-playlist-artist-track">
+            <img src="images/display-music/the-other-albums-tracks/phong-cach.jfif" alt="">
+          </div>
+          <div class="info-artist-in-playlist-artist-track">
+            <p class="name-of-playlist-artist-track">Phong Cách</p>
+            <p class="artist-of-playlist-artist-track">
+              <a href="#">RPT MCK</a>
+            </p>  
+          </div>
+          <a href="#" class="button-play">
+            <i class="fa-solid fa-play"></i>
+            <audio class="song" >
+              <source type="audio/mpeg" 
+                src="audio/the-other-albums-tracks/[SPOTIFY-DOWNLOADER.COM] Phong Cách.mp3">
+              <span>Phong Cách_single_track_of_24K.Right_page_of_track</span>
+            </audio>
+          </a>
+        </div>
+        <div class="playlist-artist-track">
+          <div class="image-of-playlist-track-in-playlist-artist-track">
+            <img src="images/display-music/the-other-albums-tracks/buon-hay-vui.jfif" alt="">
+          </div>
+          <div class="info-artist-in-playlist-artist-track">
+            <p class="name-of-playlist-artist-track">Buồn Hay Vui(feat.RPT MCK, Obito, Ronboogz & Boyzed)</p>
+            <p class="artist-of-playlist-artist-track">
+              <a href="#">VSOUL</a>,
+              <a href="#">RPT MCK</a>,
+              <a href="#">Obito</a>,
+              <a href="#">Ronboogz</a>,
+              <a href="#">Boyzed</a>
+            </p>
+          </div>
+          <a href="#" class="button-play">
+            <i class="fa-solid fa-play"></i>
+            <audio class="song" >
+              <source type="audio/mpeg" 
+                src="audio/the-other-albums-tracks/[SPOTIFY-DOWNLOADER.COM] Buồn Hay Vui (feat. RPT MCK, Obito, Ronboogz & Boyzed).mp3">
+              <span>Buồn Hay Vui_single_track_of_24K.Right_page_of_track</span>
+            </audio>
+          </a>
+        </div>
+        <div class="playlist-artist-track">
+          <div class="image-of-playlist-track-in-playlist-artist-track">
+            <img src="images/display-music/the-other-albums-tracks/chim-sau.jfif" alt="">
+          </div>
+          <div class="info-artist-in-playlist-artist-track">
+            <p class="name-of-playlist-artist-track">Chìm Sâu</p>
+            <p class="artist-of-playlist-artist-track">
+              <a href="#">RPT MCK</a>,
+              <a href="#">Trung Trần</a>
+            </p>
+          </div>
+          <a href="#" class="button-play">
+            <i class="fa-solid fa-play"></i>
+            <audio class="song" >
+              <source type="audio/mpeg" 
+                src="audio/the-other-albums-tracks/[SPOTIFY-DOWNLOADER.COM] Chìm Sâu.mp3">
+              <span>Chìm Sâu_single_track_of_24K.Right_page_of_track</span>
+            </audio>
+          </a>
+        </div>
+        <div class="playlist-artist-track">
+          <div class="image-of-playlist-track-in-playlist-artist-track">
+            <img src="images/display-music/the-other-albums-tracks/tai-vi-sao.jfif" alt="">
+          </div>
+          <div class="info-artist-in-playlist-artist-track">
+            <p class="name-of-playlist-artist-track">Tại Vì Sao</p>
+            <p class="artist-of-playlist-artist-track">
+              <a href="#">Tại Vì Sao</a>
+            </p>
+          </div>
+          <a href="#" class="button-play">
+            <i class="fa-solid fa-play"></i>
+            <audio class="song" >
+              <source type="audio/mpeg" 
+                src="audio/the-other-albums-tracks/[SPOTIFY-DOWNLOADER.COM] Tại Vì Sao.mp3">
+              <span>Tại Vì Sao_single_track_of_24K.Right_page_of_track</span>
+            </audio>
+          </a>
+        </div>  
+        <div class="playlist-artist-track">
+          <div class="image-of-playlist-track-in-playlist-artist-track">
+            <img src="images/display-music/the-other-albums-tracks/khong-can-co.jfif" alt="">
+          </div>
+          <div class="info-artist-in-playlist-artist-track">
+            <p class="name-of-playlist-artist-track">Không Cần Cố</p>
+            <p class="artist-of-playlist-artist-track">
+              <a href="#">RPT MCK</a>,
+              <a href="#">tlinh</a>
+            </p>
+          </div>
+          <a href="#" class="button-play">
+            <i class="fa-solid fa-play"></i>
+            <audio class="song" >
+              <source type="audio/mpeg" 
+                src="audio/the-other-albums-tracks/[SPOTIFY-DOWNLOADER.COM] Không Cần Cố.mp3">
+                <span>Không Cần Cố_single_track_of_24K.Right_page_of_track</span>
+            </audio>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+      <div class="title-and-see-all">
+        <h1>
+          <a href="display-all-track.html">
+            Fan cũng thích
+          </a>
+        </h1>
+        <h4><a href="#">Hiện tất cả</a></h4>
+      </div>
+      <div class="grid-playlist-artist-track artist">
+        <div class="playlist-artist-track">
+          <div class="image-of-artist-in-playlist-artist-track">
+            <img src="images/display-music/recently-played/artist/wrxdie-artist.jfif" alt="">
+            <span class="hidden-name-of-playlist">Wrxdie_artist_in_page_of_track</span>
+          </div>
+          <div class="info-artist-in-playlist-artist-track">
+            <p class="name-of-playlist-artist-track">Wrxdie</p>
+            <p class="artist-of-playlist-artist-track">
+              Nghệ sĩ
+            </p>  
+          </div>
+          <a href="#" class="button-play">
+            <i class="fa-solid fa-play"></i>
+          </a>
+        </div>
+        <div class="playlist-artist-track artist">
+          <div class="image-of-artist-in-playlist-artist-track">
+            <img src="images/display-music/popular-albums/danh-doi-obito.jfif" alt="">
+            <span class="hidden-name-of-playlist">Obito_artist_in_page_of_track</span>
+          </div>
+          <div class="info-artist-in-playlist-artist-track">
+            <p class="name-of-playlist-artist-track">Obito</p>
+            <p class="artist-of-playlist-artist-track">
+              Nghệ sĩ
+            </p>  
+          </div>
+          <a href="#" class="button-play">
+            <i class="fa-solid fa-play"></i>
+          </a>
+        </div>
+        <div class="playlist-artist-track artist">
+          <div class="image-of-artist-in-playlist-artist-track">
+            <img src="images/display-music/fan-also-like-artist/low-g.jfif" alt="">
+            <span class="hidden-name-of-playlist">Low G_artist_in_page_of_track</span>
+          </div>
+          <div class="info-artist-in-playlist-artist-track">
+            <p class="name-of-playlist-artist-track">Low G</p>
+            <p class="artist-of-playlist-artist-track">
+              Nghệ sĩ
+            </p>  
+          </div>
+          <a href="#" class="button-play">
+            <i class="fa-solid fa-play"></i>
+          </a>
+        </div>
+        <div class="playlist-artist-track artist">
+          <div class="image-of-artist-in-playlist-artist-track">
+            <img src="images/display-music/popular-artists/tlinh.jfif" alt="">
+            <span class="hidden-name-of-playlist">tlinh_artist_in_page_of_track</span>
+          </div>
+          <div class="info-artist-in-playlist-artist-track">
+            <p class="name-of-playlist-artist-track">tlinh</p>
+            <p class="artist-of-playlist-artist-track">
+              Nghệ sĩ
+            </p>  
+          </div>
+          <a href="#" class="button-play">
+            <i class="fa-solid fa-play"></i>
+          </a>
+        </div>
+        <div class="playlist-artist-track artist">
+          <div class="image-of-artist-in-playlist-artist-track">
+            <img src="images/display-music/fan-also-like-artist/nger.jfif" alt="">
+            <span class="hidden-name-of-playlist">Nger_artist_in_page_of_track</span>
+          </div>
+          <div class="info-artist-in-playlist-artist-track">
+            <p class="name-of-playlist-artist-track">Nger</p>
+            <p class="artist-of-playlist-artist-track">
+              Nghệ sĩ
+            </p>  
+          </div>
+          <a href="#" class="button-play">
+            <i class="fa-solid fa-play"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="display-music-of-playlist recommend-margin-top">
+      <h1 class="recommend">Đề Xuất</h1>
+      <div class="th-of-music">
+        <span class="title-in-th-of-music">Tên bài hát</span>
+        <span class="image-in-th-of-music">
+          <i class="fa-regular fa-image"></i>
+        </span>
+        <span class="time"><i class="fa-regular fa-clock"></i></span>
+        <span class="eye"><i class="fa-regular fa-eye"></i></span>
+      </div>
+      <div class="all-music-in-playlist">
+        <div class="track-in-playlist">
+          <div class="info-of-track-artist-in-page-playlist">
+            <span class="index-of-track-in-play-list">1</span>
+            <a href="#" class="button-play-of-track-in-play-list">
+              <i class="fa-solid fa-play"></i>
+              <audio class="song" >
+                <source type="audio/mpeg" 
+                  src="audio/recommend/[SPOTIFY-DOWNLOADER.COM] Anh Đã Quen Với Cô Đơn.mp3">
+                  <span>Anh Đã Quen Với Cô Đơn_recommend_page_of_track</span>
+              </audio>
+            </a>
+            <div class="name-of-track-artist-in-page-playlist">
+              <a href="#" class="name-of-track-in-page-playlist">Anh Đã Quen Với Cô Đơn</a>
+              <p class="name-of-artists-in-page-playlist">
+                <a href="#">SOOBIN</a>
+              </p>
+            </div>
+          </div>
+          <div class="image-of-track-artist-in-page-playlist">
+            <img src="images/display-music/recommend-track/anh-da-quen-voi-co-don.jfif" alt="">
+          </div>
+          <div class="time-of-track-artist-in-page-playlist">
+            <span>4:28</span>
+          </div>
+          <div class="listens-of-track-artist-in-page-playlist">
+            <a href="#">
+              <i class="fa-regular fa-heart"></i>
+            </a>
+            <span>7.744.557</span>
+          </div>
+        </div>
+        <div class="track-in-playlist">
+          <div class="info-of-track-artist-in-page-playlist">
+            <span class="index-of-track-in-play-list">2</span>
+            <a href="#" class="button-play-of-track-in-play-list">
+              <i class="fa-solid fa-play"></i>
+              <audio class="song" >
+                <source type="audio/mpeg" 
+                  src="audio/recommend/[SPOTIFY-DOWNLOADER.COM] Em iu.mp3">
+                  <span>Em iu_recommend_page_of_track</span>
+              </audio>
+            </a>
+            <div class="name-of-track-artist-in-page-playlist">
+              <a href="#" class="name-of-track-in-page-playlist">Em Iu</a>
+              <p class="name-of-artists-in-page-playlist">
+                <a href="#">Andree Right Hand</a>,
+                <a href="#">Wrxdie</a>,
+                <a href="#">Bình Gold</a>,
+                <a href="#">2pillz</a>
+              </p>
+            </div>
+          </div>
+          <div class="image-of-track-artist-in-page-playlist">
+            <img src="images/display-music/recommend-track/em-iu.jfif" alt="">
+          </div>
+          <div class="time-of-track-artist-in-page-playlist">
+            <span>2:59</span>
+          </div>
+          <div class="listens-of-track-artist-in-page-playlist">
+            <a href="#">
+              <i class="fa-regular fa-heart"></i>
+            </a>
+            <span>10.628.288</span>
+          </div>
+        </div>
+        <div class="track-in-playlist">
+          <div class="info-of-track-artist-in-page-playlist">
+            <span class="index-of-track-in-play-list">3</span>
+            <a href="#" class="button-play-of-track-in-play-list">
+              <i class="fa-solid fa-play"></i>
+              <audio class="song" >
+                <source type="audio/mpeg" 
+                  src="audio/recommend/[SPOTIFY-DOWNLOADER.COM] Lan Man.mp3">
+                  <span>Lan Man_recommend_page_of_track</span>
+              </audio>
+            </a>
+            <div class="name-of-track-artist-in-page-playlist">
+              <a href="#" class="name-of-track-in-page-playlist">Lan Man</a>
+              <p class="name-of-artists-in-page-playlist">
+                <a href="#">Ronboogz</a>
+              </p>
+            </div>
+          </div>
+          <div class="image-of-track-artist-in-page-playlist">
+            <img src="images/display-music/recommend-track/lan-man.jfif" alt="">
+          </div>
+          <div class="time-of-track-artist-in-page-playlist">
+            <span>3:36</span>
+          </div>
+          <div class="listens-of-track-artist-in-page-playlist">
+            <a href="#">
+              <i class="fa-regular fa-heart"></i>
+            </a>
+            <span>9.413.185</span>
+          </div>
+        </div>
+        <div class="track-in-playlist">
+          <div class="info-of-track-artist-in-page-playlist">
+            <span class="index-of-track-in-play-list">4</span>
+            <a href="#" class="button-play-of-track-in-play-list">
+              <i class="fa-solid fa-play"></i>
+              <audio class="song" >
+                <source type="audio/mpeg" 
+                  src="audio/recommend/[SPOTIFY-DOWNLOADER.COM] Tay To.mp3">
+                  <span>Tay to_recommend_page_of_track</span>
+              </audio>
+            </a>
+            <div class="name-of-track-artist-in-page-playlist">
+              <a href="#" class="name-of-track-in-page-playlist">Tay To</a>
+              <p class="name-of-artists-in-page-playlist">
+                <a href="#">Rapital</a>,
+                <a href="#">RPT MCK</a>,
+                <a href="#">Phongkhin</a>
+              </p>
+            </div>
+          </div>
+          <div class="image-of-track-artist-in-page-playlist">
+            <img src="images/display-music/recommend-track/tay-to.jfif" alt="">
+          </div>
+          <div class="time-of-track-artist-in-page-playlist">
+            <span>2:45</span>
+          </div>
+          <div class="listens-of-track-artist-in-page-playlist">
+            <a href="#">
+              <i class="fa-regular fa-heart"></i>
+            </a>
+            <span>12.529.675</span>
+          </div>
+        </div>
+        <div class="track-in-playlist">
+          <div class="info-of-track-artist-in-page-playlist">
+            <span class="index-of-track-in-play-list">5</span>
+            <a href="#" class="button-play-of-track-in-play-list">
+              <i class="fa-solid fa-play"></i>
+              <audio class="song" >
+                <source type="audio/mpeg" 
+                  src="audio/recommend/[SPOTIFY-DOWNLOADER.COM] Trước Khi Em Tồn Tại.mp3">
+                  <span>Trước Khi Em Tồn Tại_recommend_page_of_track</span>
+              </audio>
+            </a>
+            <div class="name-of-track-artist-in-page-playlist">
+              <a href="#" class="name-of-track-in-page-playlist">Trước Khi Em Tồn Tại</a>
+              <p class="name-of-artists-in-page-playlist">
+                <a href="#">Thắng</a>
+              </p>
+            </div>
+          </div>
+          <div class="image-of-track-artist-in-page-playlist">
+            <img src="images/display-music/recommend-track/truoc-khi-em-ton-tai.jfif" alt="">
+          </div>
+          <div class="time-of-track-artist-in-page-playlist">
+            <span>3:14</span>
+          </div>
+          <div class="listens-of-track-artist-in-page-playlist">
+            <a href="#">
+              <i class="fa-regular fa-heart"></i>
+            </a>
+            <span>7.413.221</span>
+          </div>
+        </div>
+      </div>   
+    </div>
+
+    <div id="aa" style="padding-bottom: 70px;"></div>
+  </section>
+
+  <script src="js/sidebar.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/forAllPage.js"></script>
+  <script src="js/pageOfArtist.js"></script>
+</body>
+</html>
