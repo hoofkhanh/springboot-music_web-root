@@ -1,5 +1,19 @@
 document.addEventListener('DOMContentLoaded', function(){
 	
+	async function clickToNameArtistInDataOtherTrackAndAlbumAndGoToSearch(nameArtist){
+	    let name = nameArtist;
+		await search(name);
+		document.getElementById('button-search-all').click();
+		Array.from(document.getElementById('all-artist-in-page-of-search').children).forEach((element, index) => {
+			if(index >0 ){
+				let nameInSearch = element.querySelector('.name-of-playlist-artist-track').textContent;
+				if(nameInSearch == name){
+					element.click();
+				}
+			}
+		});
+   }
+	
 	function seeAllMasterPlaylist(newMasterPlaylistDiv, masterPlaylist, nextElement , titleTextContent,quantity){		
 		
 		if(titleTextContent == 'Rút gọn'){
@@ -18,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function(){
 				title.querySelector('h1 a').textContent = masterPlaylist.titleOfMasterPlaylist;
 				
 				title.querySelector('h4 a').textContent = newMasterPlaylistDiv.querySelector('.title-and-see-all h4 a').textContent;
-				console.log(title.querySelector('h4 a').textContent)
 				newMasterPlaylistDiv.appendChild(title);
 				
 				title.querySelector('h4 a').addEventListener('click', function(){
@@ -56,6 +69,10 @@ document.addEventListener('DOMContentLoaded', function(){
 								
 								let artistOfPlaylist =  infoOfPlaylist.querySelector(".artist-of-playlist-artist-track");
 								artistOfPlaylist.querySelector('a').innerHTML = playlist.user.artistName;
+								artistOfPlaylist.querySelector('a').addEventListener('click', function(event){
+									event.stopPropagation();
+									clickToNameArtistInDataOtherTrackAndAlbumAndGoToSearch(playlist.user.artistName);
+								});
 								
 								newPlaylistDiv.appendChild(infoOfPlaylist)
 							}else{
@@ -173,6 +190,10 @@ document.addEventListener('DOMContentLoaded', function(){
 									
 									let artistOfPlaylist =  infoOfPlaylist.querySelector(".artist-of-playlist-artist-track");
 									artistOfPlaylist.querySelector('a').innerHTML = playlist.user.artistName;
+									artistOfPlaylist.querySelector('a').addEventListener('click', function(event){
+										event.stopPropagation();
+										clickToNameArtistInDataOtherTrackAndAlbumAndGoToSearch(playlist.user.artistName);
+									});
 									
 									newPlaylistDiv.appendChild(infoOfPlaylist)
 								}else{

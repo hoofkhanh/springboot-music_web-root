@@ -109,5 +109,17 @@ public class TrackController {
 		return "Đã tăng";
 	}
 	
-
+	
+	@GetMapping("/tracks/checkPrivate")
+	@ResponseBody
+	public boolean checkPrivate(String trackTitle) {
+		return this.trackService.checkPrivate(trackTitle);
+	}
+	
+	@GetMapping("/tracks/getLyrics")
+	@ResponseBody
+	public String getLyrics(String trackTitle) throws IOException {
+		return this.trackService.getLyrics(trackTitle);
+	}
+	
 }

@@ -24,4 +24,6 @@ public class LoginController {
 		model.addAttribute("title", "Home Page");
 		return "index";
 	}
+	
+	
 }

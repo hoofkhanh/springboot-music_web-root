@@ -1,6 +1,60 @@
 document.addEventListener('DOMContentLoaded', function(){
 	
   var checkEvent = ''	;
+  
+  async function clickTrackTitleAndGoToSearch(trackTitle){
+		let name = trackTitle;
+		await search(name);
+		document.getElementById('button-search-all').click();
+		Array.from(document.getElementById('all-track-in-page-of-search').children).forEach((element, index) => {
+			if(index >0 ){
+				let nameInSearch = element.querySelector('.name-of-playlist-artist-track').textContent;
+				if(nameInSearch == name){
+					element.click();
+				}
+			}
+		});
+	}
+	
+	async function clickToNameArtistGoMyMusic(trackTitle){
+	    let name = trackTitle;
+		await yourTracks();
+		
+		Array.from(document.getElementById('all-track').children).forEach((element, index) => {
+			if(index >0 ){
+				let nameInSearch = element.querySelector('.name-of-playlist-artist-track').textContent;
+				if(nameInSearch == name){
+					element.click();
+				}
+			}
+		});
+   }
+   
+   function checkPrivateAndClickAndGoToPage (trackTitle){
+	   fetch('/artist/tracks/checkPrivate?trackTitle='+trackTitle)
+	  	.then(response => response.text())
+	  	.then(check => {
+			 if(check == 'true'){
+				 clickToNameArtistGoMyMusic(trackTitle);
+			 }else{
+				clickTrackTitleAndGoToSearch(trackTitle);
+			 }
+	     });
+   }
+   
+   async function clickToNameArtistGoToSearch(nameArtist){
+	    let name = nameArtist;
+		await search(name);
+		document.getElementById('button-search-all').click();
+		Array.from(document.getElementById('all-artist-in-page-of-search').children).forEach((element, index) => {
+			if(index >0 ){
+				let nameInSearch = element.querySelector('.name-of-playlist-artist-track').textContent;
+				if(nameInSearch == name){
+					element.click();
+				}
+			}
+		});
+   }
 	
 /*get dữ liệu track*/
 	 async function getTrackData(name){
@@ -34,7 +88,14 @@ document.addEventListener('DOMContentLoaded', function(){
 									newTrackParentDiv.appendChild(imageOfTrack)
 								}else if(i == 1){
 									let trackTitle = document.createElement("td");
-									trackTitle.textContent = track.trackTitle;
+									let aTag = document.createElement("a");
+									aTag.textContent = track.trackTitle;
+									aTag.style.cursor= 'pointer';
+									aTag.addEventListener('click', function(){
+										checkPrivateAndClickAndGoToPage(track.trackTitle);
+									});
+									
+									trackTitle.appendChild(aTag);
 									newTrackParentDiv.appendChild(trackTitle)
 								}else if(i ==2){
 									let genre = document.createElement("td");
@@ -42,7 +103,14 @@ document.addEventListener('DOMContentLoaded', function(){
 									newTrackParentDiv.appendChild(genre)
 								}else if(i ==3){
 									let user = document.createElement("td");
-									user.textContent = track.user.artistName;
+									let aTag = document.createElement("a");
+									aTag.style.cursor= 'pointer';
+									aTag.textContent = track.user.artistName;
+									aTag.addEventListener('click', function(event){
+										event.stopPropagation();
+										clickToNameArtistGoToSearch(track.user.artistName);
+									});
+									user.appendChild(aTag);
 									newTrackParentDiv.appendChild(user)
 								}else if(i ==4){
 									let cooperator = document.createElement("td");
@@ -52,6 +120,10 @@ document.addEventListener('DOMContentLoaded', function(){
 												aTagNameOfCooperatorArtist.classList.add('artist');
 												aTagNameOfCooperatorArtist.setAttribute('href', '#');
 												aTagNameOfCooperatorArtist.innerHTML = track.userList[i].artistName;
+												aTagNameOfCooperatorArtist.addEventListener('click', function(event){
+													event.stopPropagation();
+													clickToNameArtistGoToSearch(track.userList[i].artistName);
+												})
 												cooperator.appendChild(aTagNameOfCooperatorArtist);
 											if(i != track.userList.length -1 ){
 												aTagNameOfCooperatorArtist.insertAdjacentHTML('afterend', ',  ');
@@ -122,8 +194,11 @@ document.addEventListener('DOMContentLoaded', function(){
       document.getElementById('index').style.display = 'none';
       document.getElementById('display-all-track').style.display = 'none';  
       document.getElementById('page-of-search').style.display = 'none';
+      document.getElementById('page-of-lyrics').style.display = 'none';
       
       document.getElementById('reset-submit-form-upload-playlist').click();
+      
+      document.getElementById('input-search-track-album-playlist-artist').value='';
       
     /*khi post tệp lên input file thì change image*/
     if(checkEvent == ''){

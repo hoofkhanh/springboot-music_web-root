@@ -1,16 +1,19 @@
 document.addEventListener('DOMContentLoaded', function(){
 	document.getElementById('button-search-all').style.backgroundColor = 'rgba(75, 73, 73, 0.992)';
 	
-	function returnPageOfIndex(){
-		document.getElementById('index').style.display = 'block';
-	    document.getElementById('display-all-track').style.display = 'none';
-	    document.getElementById('page-of-play-list').style.display = 'none';
-	    document.getElementById('page-of-artist').style.display = 'none';
-	    document.getElementById('page-of-track').style.display = 'none';
-	    document.getElementById('upload-track-by-artist').style.display = 'none';
-	    document.getElementById('upload-playlist-by-artist').style.display = 'none';
-	    document.getElementById('page-of-search').style.display = 'none';
-	}
+	async function clickToNameArtistInDataOtherTrackAndAlbumAndGoToSearch(nameArtist){
+	    let name = nameArtist;
+		await search(name);
+		document.getElementById('button-search-all').click();
+		Array.from(document.getElementById('all-artist-in-page-of-search').children).forEach((element, index) => {
+			if(index >0 ){
+				let nameInSearch = element.querySelector('.name-of-playlist-artist-track').textContent;
+				if(nameInSearch == name){
+					element.click();
+				}
+			}
+		});
+   }
 	
 	async function searchArtist(value){
 		await fetch('/artist/artists/findArtistByArtistNameInSearch?artistName='+value)
@@ -131,6 +134,12 @@ document.addEventListener('DOMContentLoaded', function(){
 									
 									let artistOfPlaylist =  infoOfPlaylist.querySelector(".artist-of-playlist-artist-track");
 									artistOfPlaylist.querySelector('a').innerHTML = playlist.user.artistName;
+									artistOfPlaylist.querySelector('a').addEventListener('click', function(event) {
+										document.getElementById('input-search-track-album-playlist-artist').value = '';
+										event.stopPropagation();
+										clickToNameArtistInDataOtherTrackAndAlbumAndGoToSearch(playlist.user.artistName);
+									});
+									
 									
 									newPlaylistParentDiv.appendChild(infoOfPlaylist)
 								}else{
@@ -217,6 +226,11 @@ document.addEventListener('DOMContentLoaded', function(){
 									
 									let artistOfPlaylist =  infoOfPlaylist.querySelector(".artist-of-playlist-artist-track");
 									artistOfPlaylist.querySelector('a').innerHTML = playlist.user.artistName;
+									artistOfPlaylist.querySelector('a').addEventListener('click', function(event){
+										document.getElementById('input-search-track-album-playlist-artist').value = '';
+										event.stopPropagation();
+										clickToNameArtistInDataOtherTrackAndAlbumAndGoToSearch(playlist.user.artistName);
+									});
 									
 									newPlaylistParentDiv.appendChild(infoOfPlaylist)
 								}else{
@@ -303,6 +317,11 @@ document.addEventListener('DOMContentLoaded', function(){
 								
 								let artistOfTrack =  infoOfTrack.querySelector(".artist-of-playlist-artist-track");
 								artistOfTrack.querySelector('a').innerHTML = track.user.artistName;
+								artistOfTrack.querySelector('a').addEventListener('click', function(event){
+									document.getElementById('input-search-track-album-playlist-artist').value = '';
+									event.stopPropagation();
+									clickToNameArtistInDataOtherTrackAndAlbumAndGoToSearch(track.user.artistName);
+								 });
 								if(track.userList.length !=0){
 									artistOfTrack.querySelector('a').insertAdjacentHTML('afterend', ',  ');
 									
@@ -310,6 +329,11 @@ document.addEventListener('DOMContentLoaded', function(){
 										let aTagNameOfCooperatorArtist =  document.createElement("a");
 											aTagNameOfCooperatorArtist.classList.add('artist');
 											aTagNameOfCooperatorArtist.innerHTML = track.userList[i].artistName;
+											aTagNameOfCooperatorArtist.addEventListener('click', function(event){
+												document.getElementById('input-search-track-album-playlist-artist').value = '';
+												event.stopPropagation();
+												clickToNameArtistInDataOtherTrackAndAlbumAndGoToSearch(track.userList[i].artistName);
+											});
 											artistOfTrack.appendChild(aTagNameOfCooperatorArtist)
 										if(i != track.userList.length -1 ){
 											aTagNameOfCooperatorArtist.insertAdjacentHTML('afterend', ',  ');
@@ -371,6 +395,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	    document.getElementById('page-of-track').style.display = 'none';
 	    document.getElementById('upload-track-by-artist').style.display = 'none';
 	    document.getElementById('upload-playlist-by-artist').style.display = 'none';
+	    document.getElementById('page-of-lyrics').style.display = 'none';
 	    
 	    await searchArtist(valueOfInput);
 	    
@@ -384,7 +409,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	let inputSearch = document.getElementById('input-search-track-album-playlist-artist');
 	inputSearch.addEventListener('input', async function(){
 		if(inputSearch.value == ''){
-			returnPageOfIndex();
+			index();
 		}else {
 			await search(inputSearch.value);
 		}

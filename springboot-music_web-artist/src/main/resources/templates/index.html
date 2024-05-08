@@ -39,7 +39,7 @@
       <div class="left-header">
         <div class="display-image-of-track-playlist" >
           <a href="#">
-            <img id="image-of-track-playlist" src="#" alt="">
+            <img id="image-of-track-playlist" src="#" alt="" >
           </a>
         </div>
         <div id="info-of-track-artist" class="info-of-track-artist">
@@ -78,6 +78,9 @@
       <div class="volume-div">
         <i id="volume-icon" class="fa-solid fa-volume-high"></i>
         <input type="range" min="0" max="1" step="0.01" value="1" id="volume-input">
+         <button>
+            <i class="fa-solid fa-music" id="icon-lyrics"></i>
+          </button>
       </div>
       <div class="right-header">
         <button class="button-queue-tracks">
@@ -124,7 +127,10 @@
 		  <button class="dropbtn">Tùy chọn</button>
 		  <div class="dropdown-content">
 			<div class="span-upload-track" th:if="${#authentication.principal != null}">
-				<a id="a-my-profile" th:value="${artistName}">Tài khoản của tôi</a>
+				<a id="a-my-profile" th:value="${artistName}">Trang của tôi</a>
+		  	</div>
+		  	<div class="span-upload-track"  th:if="${#authentication.principal != null}">
+				<a th:href="@{/artists/profile}">Thay đổi thông tin cá nhân</a>
 		  	</div>
 		    <div class="span-upload-track" th:if="${#authentication.principal != null}">
 				<a id="a-upload-track">Đăng nhạc</a>
@@ -387,174 +393,7 @@
         </div>
         
 
-        <div class="grid-all-playlist-artist-track">
-          <div class="title-and-see-all">
-            <h1><a href="#">Album phổ biến</a></h1>
-            <h4><a href="#">Hiện tất cả</a></h4>
-          </div>
-          <div class="grid-playlist-artist-track">
-            <div class="playlist-artist-track album-or-playlist" >
-              <div class="image-of-playlist-track-in-playlist-artist-track">
-                <img src="images/display-music/popular-albums/loi-choi-wren-evans.jfif" alt="">
-                <span class="hidden-name-of-playlist">LOI CHOI: The Neo Pop Punk_popular_album</span>
-              </div>
-              <div class="info-artist-in-playlist-artist-track">
-                <p class="name-of-playlist-artist-track">LOI CHOI: The Neo Pop Punk</p>
-                <p class="artist-of-playlist-artist-track">
-                  <a href="#" class="artist">Wren Evans</a>,
-                  <a href="#" class="artist">itsnk</a>
-                </p>
-              </div>
-              <a href="#" class="button-play">
-                <i class="fa-solid fa-play"></i>
-              </a>
-            </div>
-            <div class="playlist-artist-track album-or-playlist" >
-              <div class="image-of-playlist-track-in-playlist-artist-track">
-                <img src="images/display-music/popular-albums/99-mck.jfif" alt="">
-                <span class="hidden-name-of-playlist">99%_popular_album</span>
-              </div>
-              <div class="info-artist-in-playlist-artist-track">
-                <p class="name-of-playlist-artist-track">99%</p>
-                <p class="artist-of-playlist-artist-track">
-                  <a href="#" class="artist">RPT MCK</a>
-                </p>
-              </div>
-              <a href="#" class="button-play">
-                <i class="fa-solid fa-play"></i>
-              </a>
-            </div>
-            <div class="playlist-artist-track album-or-playlist">
-              <div class="image-of-playlist-track-in-playlist-artist-track">
-                <img src="images/display-music/popular-albums/danh-doi-obito.jfif" alt="">
-                <span class="hidden-name-of-playlist">Đánh Đổi_popular_album</span>
-              </div>
-              <div class="info-artist-in-playlist-artist-track">
-                <p class="name-of-playlist-artist-track">Đánh Đổi</p>
-                <p class="artist-of-playlist-artist-track">
-                  <a href="#" class="artist">Obito</a>
-                </p>
-              </div>
-              <a href="#" class="button-play">
-                <i class="fa-solid fa-play"></i>
-              </a>
-            </div>
-            <div class="playlist-artist-track album-or-playlist">
-              <div class="image-of-playlist-track-in-playlist-artist-track">
-                <img src="images/display-music/popular-albums/ai-cung-pbdtdd-ht2.jfif" alt="">
-                <span class="hidden-name-of-playlist">Ai cũng phải bắt đầu từ đâu đó_popular_album</span>
-              </div>
-              <div class="info-artist-in-playlist-artist-track">
-                <p class="name-of-playlist-artist-track">Ai cũng phải bắt đầu từ đâu đó</p>
-                <p class="artist-of-playlist-artist-track">
-                  <a href="#" class="artist">HIEUTHUHAI</a>
-                </p>
-              </div>
-              <a href="#" class="button-play">
-                <i class="fa-solid fa-play"></i>
-              </a>
-            </div>  
-            <div class="playlist-artist-track album-or-playlist">
-              <div class="image-of-playlist-track-in-playlist-artist-track">
-                <img src="images/display-music/popular-albums/ai-tlinh.jfif" alt="">
-                <span class="hidden-name-of-playlist">album_ái_popular_album</span>
-              </div>
-              <div class="info-artist-in-playlist-artist-track">
-                <p class="name-of-playlist-artist-track">ái</p>
-                <p class="artist-of-playlist-artist-track">
-                  <a href="#" class="artist">tlinh</a>
-                </p>
-              </div>
-              <a href="#" class="button-play">
-                <i class="fa-solid fa-play"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-all-playlist-artist-track">
-          <div class="title-and-see-all">
-            <h1><a href="#">Nghệ sĩ phổ biến</a></h1>
-            <h4><a href="#">Hiện tất cả</a></h4>
-          </div>
-          <div class="grid-playlist-artist-track">
-            <div class="playlist-artist-track artist">
-              <div class="image-of-playlist-track-in-playlist-artist-track">
-                <img src="images/display-music/popular-artists/rpt-mck.jfif" alt="">
-                <span class="hidden-name-of-playlist">RPT_MCK_popular_artist</span>
-              </div>
-              <div class="info-artist-in-playlist-artist-track">
-                <p class="name-of-playlist-artist-track">RPT MCK</p>
-                <p class="artist-of-playlist-artist-track">
-                  Nghệ sĩ
-                </p>
-              </div>
-              <a href="#" class="button-play">
-                <i class="fa-solid fa-play"></i>
-              </a>
-            </div>
-            <div class="playlist-artist-track artist">
-              <div class="image-of-playlist-track-in-playlist-artist-track">
-                <img src="images/display-music/popular-artists/itsnk.jfif" alt="">
-                <span class="hidden-name-of-playlist">itsnk_popular_artist</span>
-              </div>
-              <div class="info-artist-in-playlist-artist-track">
-                <p class="name-of-playlist-artist-track">itsnk</p>
-                <p class="artist-of-playlist-artist-track">
-                  Nghệ sĩ
-                </p>
-              </div>
-              <a href="#" class="button-play">
-                <i class="fa-solid fa-play"></i>
-              </a>
-            </div>
-            <div class="playlist-artist-track artist">
-              <div class="image-of-playlist-track-in-playlist-artist-track">
-                <img src="images/display-music/popular-artists/wren-evans.jfif" alt="">
-                <span class="hidden-name-of-playlist">Wren_Evans_popular_artist</span>
-              </div>
-              <div class="info-artist-in-playlist-artist-track">
-                <p class="name-of-playlist-artist-track">Wren Evans</p>
-                <p class="artist-of-playlist-artist-track">
-                  Nghệ sĩ
-                </p>
-              </div>
-              <a href="#" class="button-play">
-                <i class="fa-solid fa-play"></i>
-              </a>
-            </div>
-            <div class="playlist-artist-track artist">
-              <div class="image-of-playlist-track-in-playlist-artist-track">
-                <img src="images/display-music/popular-artists/tlinh.jfif" alt="">
-                <span class="hidden-name-of-playlist">tlinh_popular_artist</span>
-              </div>
-              <div class="info-artist-in-playlist-artist-track">
-                <p class="name-of-playlist-artist-track">tlinh</p>
-                <p class="artist-of-playlist-artist-track">
-                  Nghệ sĩ
-                </p>
-              </div>
-              <a href="#" class="button-play">
-                <i class="fa-solid fa-play"></i>
-              </a>
-            </div>  
-            <div class="playlist-artist-track artist">
-              <div class="image-of-playlist-track-in-playlist-artist-track">
-                <img src="images/display-music/popular-artists/obito.jfif" alt="">
-                <span class="hidden-name-of-playlist">Obito_popular_artist</span>
-              </div>
-              <div class="info-artist-in-playlist-artist-track">
-                <p class="name-of-playlist-artist-track">Obito</p>
-                <p class="artist-of-playlist-artist-track">
-                  Nghệ sĩ
-                </p>
-              </div>
-              <a href="#" class="button-play">
-                <i class="fa-solid fa-play"></i>
-              </a>
-            </div>
-          </div>
-        </div>
+        
       </div>
       <div  style="padding-bottom: 70px;"></div>
 
@@ -924,7 +763,7 @@
     </section>
 
     <section id="page-of-artist" class="display-music">
-      <div class="background-playlist">
+      <div class="background-playlist" id="background-playlist">
         <div class="image-info-background-playlist">
           <div style="position: relative;">
             <img class="avatar" id="avatar-page-of-artist" 
@@ -1004,7 +843,7 @@
         </div>   
       </div>
       
-      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top" id="share-of-artist">
         <div class="title-and-see-all">
           <h1>
             <a class="button-see-all-track-album-in-page-of-artist" href="#">
@@ -1055,7 +894,7 @@
         </div>
       </div>
   
-      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top" id="single-track-of-artist">
         <div class="title-and-see-all">
           <h1>
             <a class="button-see-all-track-album-in-page-of-artist" href="#">
@@ -1084,7 +923,7 @@
         </div>
       </div>
   
-      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top" id="album-of-artist">
         <div class="title-and-see-all">
           <h1>
             <a class="button-see-all-track-album-in-page-of-artist"  href="#">
@@ -1112,7 +951,7 @@
         </div>
       </div>
       
-      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top" id="playlist-of-artist">
         <div  class="title-and-see-all">
           <h1>
             <a class="button-see-all-track-album-in-page-of-artist"  href="#">
@@ -1140,7 +979,7 @@
         </div>
       </div>
   
-      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top">
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top" id="other-artist-of-artist">
         <div class="title-and-see-all">
           <h1>
             <a  href="#">
@@ -1167,180 +1006,44 @@
           
         </div>
       </div>
-  
-      <!--<div class="display-music-of-playlist recommend-margin-top">
-        <h1 class="recommend">Đề Xuất</h1>
-        <div class="th-of-music">
-          <span class="title-in-th-of-music">Tên bài hát</span>
-          <span class="image-in-th-of-music">
-            <i class="fa-regular fa-image"></i>
-          </span>
-          <span class="time"><i class="fa-regular fa-clock"></i></span>
-          <span class="eye"><i class="fa-regular fa-eye"></i></span>
+  		
+	 <div style="display: none; margin-top: 20px;padding: 10px 20px;" id="return-page-of-artist">
+	 	<div class="title-and-see-all">
+          <h2>
+            <a  href="#" style="color: red !important;">
+              Quay về
+            </a>
+          </h2>
         </div>
-        <div class="all-music-in-playlist">
-          <div class="track-in-playlist">
-            <div class="info-of-track-artist-in-page-playlist">
-              <span class="index-of-track-in-play-list">1</span>
-              <a href="#" class="button-play-of-track-in-play-list">
-                <i class="fa-solid fa-play"></i>
-                <audio class="song" >
-                  <source type="audio/mpeg" 
-                    src="audio/recommend/AnhĐãQuenVớiCôĐơn.mp3">
-                    <span>Anh Đã Quen Với Cô Đơn_recommend_page_of_artist</span>
-                </audio>
-              </a>
-              <div class="name-of-track-artist-in-page-playlist">
-                <a href="#" class="name-of-track-in-page-playlist track">Anh Đã Quen Với Cô Đơn</a>
-                <p class="name-of-artists-in-page-playlist">
-                  <a href="#" class="artist">SOOBIN</a>
-                </p>
-              </div>
+	 </div>  		
+  	
+      <div class="grid-all-playlist-artist-track grid-all-playlist-artist-track-margin-top" style="display: none;" id="grid-all-following-follower">
+        <div class="title-and-see-all">
+          <h1>
+            <a  href="#">
+              Nghệ sĩ khác
+            </a>
+          </h1>
+        </div>
+        <div id="all-following-follower" class="grid-playlist-artist-track">
+          <div id="following-follower" style="display: none;" class="playlist-artist-track artist">
+            <div class="image-of-artist-in-playlist-artist-track">
+              <img src="images/display-music/recently-played/artist/wrxdie-artist.jfif" alt="">
+              <span class="hidden-name-of-playlist">Wrxdie_artist_in_page_of_artist</span>
             </div>
-            <div class="image-of-track-artist-in-page-playlist">
-              <img src="images/display-music/recommend-track/anh-da-quen-voi-co-don.jfif" alt="">
+            <div class="info-artist-in-playlist-artist-track">
+              <p class="name-of-playlist-artist-track">Wrxdie</p>
+              <p class="artist-of-playlist-artist-track">
+                Nghệ sĩ
+              </p>  
             </div>
-            <div class="time-of-track-artist-in-page-playlist">
-              <span>4:28</span>
-            </div>
-            <div class="listens-of-track-artist-in-page-playlist">
-              <a href="#">
-                <i class="fa-regular fa-heart"></i>
-              </a>
-              <span>7.744.557</span>
-            </div>
+            <a href="#" class="button-play">
+              <i class="fa-solid fa-play"></i>
+            </a>
           </div>
-          <div class="track-in-playlist">
-            <div class="info-of-track-artist-in-page-playlist">
-              <span class="index-of-track-in-play-list">2</span>
-              <a href="#" class="button-play-of-track-in-play-list">
-                <i class="fa-solid fa-play"></i>
-                <audio class="song" >
-                  <source type="audio/mpeg" 
-                    src="audio/recommend/Emiu.mp3">
-                    <span>Em iu_recommend_page_of_artist</span>
-                </audio>
-              </a>
-              <div class="name-of-track-artist-in-page-playlist">
-                <a href="#" class="name-of-track-in-page-playlist track">Em Iu</a>
-                <p class="name-of-artists-in-page-playlist">
-                  <a href="#" class="artist">Andree Right Hand</a>,
-                  <a href="#" class="artist">Wrxdie</a>,
-                  <a href="#" class="artist">Bình Gold</a>,
-                  <a href="#" class="artist">2pillz</a>
-                </p>
-              </div>
-            </div>
-            <div class="image-of-track-artist-in-page-playlist">
-              <img src="images/display-music/recommend-track/em-iu.jfif" alt="">
-            </div>
-            <div class="time-of-track-artist-in-page-playlist">
-              <span>2:59</span>
-            </div>
-            <div class="listens-of-track-artist-in-page-playlist">
-              <a href="#">
-                <i class="fa-regular fa-heart"></i>
-              </a>
-              <span>10.628.288</span>
-            </div>
-          </div>
-          <div class="track-in-playlist">
-            <div class="info-of-track-artist-in-page-playlist">
-              <span class="index-of-track-in-play-list">3</span>
-              <a href="#" class="button-play-of-track-in-play-list">
-                <i class="fa-solid fa-play"></i>
-                <audio class="song" >
-                  <source type="audio/mpeg" 
-                    src="audio/recommend/LanMan.mp3">
-                    <span>Lan Man_recommend_page_of_artist</span>
-                </audio>
-              </a>
-              <div class="name-of-track-artist-in-page-playlist">
-                <a href="#" class="name-of-track-in-page-playlist track">Lan Man</a>
-                <p class="name-of-artists-in-page-playlist">
-                  <a href="#" class="artist">Ronboogz</a>
-                </p>
-              </div>
-            </div>
-            <div class="image-of-track-artist-in-page-playlist">
-              <img src="images/display-music/recommend-track/lan-man.jfif" alt="">
-            </div>
-            <div class="time-of-track-artist-in-page-playlist">
-              <span>3:36</span>
-            </div>
-            <div class="listens-of-track-artist-in-page-playlist">
-              <a href="#">
-                <i class="fa-regular fa-heart"></i>
-              </a>
-              <span>9.413.185</span>
-            </div>
-          </div>
-          <div class="track-in-playlist">
-            <div class="info-of-track-artist-in-page-playlist">
-              <span class="index-of-track-in-play-list">4</span>
-              <a href="#" class="button-play-of-track-in-play-list">
-                <i class="fa-solid fa-play"></i>
-                <audio class="song" >
-                  <source type="audio/mpeg" 
-                    src="audio/recommend/TayTo.mp3">
-                    <span>Tay to_recommend_page_of_artist</span>
-                </audio>
-              </a>
-              <div class="name-of-track-artist-in-page-playlist">
-                <a href="#" class="name-of-track-in-page-playlist track">Tay To</a>
-                <p class="name-of-artists-in-page-playlist">
-                  <a href="#" class="artist">Rapital</a>,
-                  <a href="#" class="artist">RPT MCK</a>,
-                  <a href="#" class="artist">Phongkhin</a>
-                </p>
-              </div>
-            </div>
-            <div class="image-of-track-artist-in-page-playlist">
-              <img src="images/display-music/recommend-track/tay-to.jfif" alt="">
-            </div>
-            <div class="time-of-track-artist-in-page-playlist">
-              <span>2:45</span>
-            </div>
-            <div class="listens-of-track-artist-in-page-playlist">
-              <a href="#">
-                <i class="fa-regular fa-heart"></i>
-              </a>
-              <span>12.529.675</span>
-            </div>
-          </div>
-          <div class="track-in-playlist">
-            <div class="info-of-track-artist-in-page-playlist">
-              <span class="index-of-track-in-play-list">5</span>
-              <a href="#" class="button-play-of-track-in-play-list">
-                <i class="fa-solid fa-play"></i>
-                <audio class="song" >
-                  <source type="audio/mpeg" 
-                    src="audio/recommend/TrướcKhiEmTồnTại.mp3">
-                    <span>Trước Khi Em Tồn Tại_recommend_page_of_artist</span>
-                </audio>
-              </a>
-              <div class="name-of-track-artist-in-page-playlist">
-                <a href="#" class="name-of-track-in-page-playlist track">Trước Khi Em Tồn Tại</a>
-                <p class="name-of-artists-in-page-playlist">
-                  <a href="#" class="artist">Thắng</a>
-                </p>
-              </div>
-            </div>
-            <div class="image-of-track-artist-in-page-playlist">
-              <img src="images/display-music/recommend-track/truoc-khi-em-ton-tai.jfif" alt="">
-            </div>
-            <div class="time-of-track-artist-in-page-playlist">
-              <span>3:14</span>
-            </div>
-            <div class="listens-of-track-artist-in-page-playlist">
-              <a href="#">
-                <i class="fa-regular fa-heart"></i>
-              </a>
-              <span>7.413.221</span>
-            </div>
-          </div>
-        </div>   
-      </div>-->
+          
+        </div>
+      </div>
       
       <div id="aa" style="padding-bottom: 70px;"></div>
     </section>
@@ -1653,6 +1356,7 @@
             <img id="imageOfTrack" src="">
           </div>
           <input name="trackTitle" id="trackTitleInForm" type="text" placeholder="Tên bài hát (không nhập chữ '&')" required> <br>
+          <input name="lyrics" id="lyrics" type="text" placeholder="Nhập tên chủ bài hát nếu muốn có lyrics"> <br>
           <select id="genreInForm" name="genre" required>
             <option th:each="genre:${genreList}" th:text="${genre.name}" th:value="${genre.id}"></option>
           </select>
@@ -1871,29 +1575,23 @@
       <div id="aa" style="padding-bottom: 70px;"></div>
     </section>
     
+    <section id="page-of-lyrics"  class="display-music">
+	 	<div class="display-lyrics">
+		</div>
+      
+      
+      <div id="aa" style="padding-bottom: 70px;"></div>
+    </section>
+    
     <a href="#" class="button-play-of-track-in-play-list" style="display: none;">
 	  <i class="fa-solid fa-play"></i>
 	  <audio class="song" id="id-quang-cao">
-	    <source type="audio/mpeg" th:src="@{/file-of-track/Chịu Cách Mình Nói Thua.mp3}">
+	    <source type="audio/mpeg" th:src="@{/file-of-track/quang-cao.m4a}">
 	      <span>quang_cao</span>
 	  </audio>
 	</a>
 	
-    <script type="text/javascript" th:src="@{/js/sidebar.js}"></script>
-    <script type="text/javascript" th:src="@{/js/index.js}"></script>
-    <script type="text/javascript" th:src="@{/js/listeningHistory_searchHistory.js}"></script>
-    <script type="text/javascript" th:src="@{/js/pageOfArtist.js}"></script>
-    <script type="text/javascript" th:src="@{/js/track.js}"></script>
-    <script type="text/javascript" th:src="@{/js/upload-track-by-artist.js}"></script>
-    <script type="text/javascript" th:src="@{/js/upload-playlist-by-artist.js}"></script>
-    <script type="text/javascript" th:src="@{/js/page-of-track.js}"></script>
-    <script type="text/javascript" th:src="@{/js/page-of-search.js}"></script>
-    <script type="text/javascript" th:src="@{/js/track_libary.js}"></script>
-    <script type="text/javascript" th:src="@{/js/masterPlaylist.js}"></script>
-    
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
-    <div class="notify-success-share" id="notify-success-share" >
+	<div class="notify-success-share" id="notify-success-share" >
 		<p>Chia sẻ thành công</p>
 	</div>
 	
@@ -1908,6 +1606,23 @@
 		<button id="confirm-yes-track">Chia sẻ</button>
 		<button  id="confirm-no-track">Hủy</button>
 	</div>
+	
+    <script type="text/javascript" th:src="@{/js/sidebar.js}"></script>
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
+    <script type="text/javascript" th:src="@{/js/listeningHistory_searchHistory.js}"></script>
+    <script type="text/javascript" th:src="@{/js/pageOfArtist.js}"></script>
+    <script type="text/javascript" th:src="@{/js/track.js}"></script>
+    <script type="text/javascript" th:src="@{/js/upload-track-by-artist.js}"></script>
+    <script type="text/javascript" th:src="@{/js/upload-playlist-by-artist.js}"></script>
+    <script type="text/javascript" th:src="@{/js/page-of-track.js}"></script>
+    <script type="text/javascript" th:src="@{/js/page-of-search.js}"></script>
+    <script type="text/javascript" th:src="@{/js/track_libary.js}"></script>
+    <script type="text/javascript" th:src="@{/js/masterPlaylist.js}"></script>
+    <script type="text/javascript" th:src="@{/js/lyrics.js}"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    
 
   </body>
 </html>

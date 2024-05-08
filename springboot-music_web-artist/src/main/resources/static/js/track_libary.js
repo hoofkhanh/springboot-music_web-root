@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function(){
-	
+		
 	async function clickInLibaryAndSearchAndGoIntoPageOfTrackOrAlbumOrArtist(div){
+		 document.getElementById('input-search-track-album-playlist-artist').value = '';
 		if(div.classList.contains('playlist-in-libary')){
 			let name = div.querySelector('.name-of-artist').textContent;
 			
@@ -71,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			.then(response => response.json())
 			.then(trackLibaryList => {
 				Array.from(trackLibaryList).forEach(trackLibary => {
-					if(trackLibary.playlist != null && trackLibary.playlist.album == true){
+					if(trackLibary.playlist != null && trackLibary.playlist.album == true && trackLibary.playlist.private == false){
 						let childElements = document.getElementById("track-playlist-in-libary").children;
 						
 						let newDivInLibary = document.createElement('div');
@@ -102,7 +103,10 @@ document.addEventListener('DOMContentLoaded', function(){
 						
 						document.getElementById('all-track-playList-artist-in-libary').appendChild(newDivInLibary);
 						
-					}else if (trackLibary.playlist != null && trackLibary.playlist.album == false){
+					}else if ((trackLibary.playlist != null && trackLibary.playlist.album == false 
+							&& trackLibary.playlist.playlistTitle.includes('Bài hát đã thích') && trackLibary.playlist.private == true)
+						|| (trackLibary.playlist != null && trackLibary.playlist.album == false 
+							&& trackLibary.playlist.playlistTitle.includes('Bài hát đã thích') == false && trackLibary.playlist.private == false)){
 						let childElements = document.getElementById("track-playlist-in-libary").children;
 						
 						let newDivInLibary = document.createElement('div');
@@ -122,8 +126,14 @@ document.addEventListener('DOMContentLoaded', function(){
 								info.innerHTML = childElements[i].innerHTML;
 								
 								if(trackLibary.playlist.playlistTitle.includes('Bài hát đã thích')){
+									let countTrack = 0;
+									Array.from(trackLibary.playlist.trackList).forEach(track => {
+										if(track.private == false){
+											countTrack ++;
+										}
+									})
 									info.querySelector(".role-of-track-playList").textContent 
-										= 'Danh sách phát • ' + trackLibary.playlist.numberOfTracks +' bài hát';
+										= 'Danh sách phát • ' + countTrack +' bài hát';
 								}else{
 									info.querySelector(".role-of-track-playList").textContent = 'Danh sách phát • ' + trackLibary.playlist.user.artistName;
 								}

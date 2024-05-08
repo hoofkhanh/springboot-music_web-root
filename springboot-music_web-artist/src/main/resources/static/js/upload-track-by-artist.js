@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
       document.getElementById('display-all-track').style.display = 'none';  
       document.getElementById('upload-playlist-by-artist').style.display = 'none'; 
       document.getElementById('page-of-search').style.display = 'none';
+      document.getElementById('page-of-lyrics').style.display = 'none';
       
       document.getElementById("upload-track-form").reset();
 	  document.getElementById("imageOfTrack").src = ''; 
@@ -42,6 +43,8 @@ document.addEventListener('DOMContentLoaded', function(){
 					document.getElementById("upload-track-form").reset();
 					document.getElementById("imageOfTrack").src = '';
 					document.getElementById('id-in-upload-track-form').value = '';
+					
+					getAllTrackLibary();
 				}else{
 					alert("Đăng thất bại do trùng tên");
 				}	       
@@ -122,6 +125,7 @@ document.addEventListener('DOMContentLoaded', function(){
 							document.getElementById('trackTitleInForm').value =  track.trackTitle;
 							document.getElementById('genreInForm').value =  track.genre.id;
 							document.getElementById('track-duration-in-upload-track').value =  track.trackDuration;
+							document.getElementById('lyrics').value =  track.lyrics;
 							
 							let userList = '';
 							for(let i=0; i< track.userList.length ; i++){
@@ -161,6 +165,10 @@ document.addEventListener('DOMContentLoaded', function(){
 						if(text.includes('Xóa thành công')){
 							getAllTrackLibary();
 						}
+						
+						document.getElementById("upload-track-form").reset();
+						document.getElementById("imageOfTrack").src = '';
+						document.getElementById('id-in-upload-track-form').value = '';
 						alert(text);
 					})
 					.catch(error  => console.error(error));

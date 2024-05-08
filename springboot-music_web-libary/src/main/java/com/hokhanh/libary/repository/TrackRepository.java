@@ -27,6 +27,9 @@ public interface TrackRepository extends JpaRepository<Track, Long> {
 	@Query(value = "SELECT * FROM tracks WHERE genre_id = :genreId", nativeQuery = true)
 	List<Track> findByGenre(@Param("genreId") Long genre_id);
 	
+	@Query(value = "SELECT * FROM tracks WHERE genre_id = :genreId AND is_private = FALSE", nativeQuery = true)
+	List<Track> findByGenreCheckPrivate(@Param("genreId") Long genre_id);
+	
 	@Query(value = "DELETE FROM playlists_tracks WHERE track_id = ?1", nativeQuery = true)
 	void deleteTrackInPlaylist(Long trackId);
 	
@@ -49,5 +52,7 @@ public interface TrackRepository extends JpaRepository<Track, Long> {
 	@Modifying
 	@Query(value = "UPDATE tracks SET number_of_listens = number_of_listens + 1 WHERE track_title = ?1", nativeQuery = true)
 	void increaseNumberOfListenByTrackTitle(String trackTitle);
+
+	
 
 }

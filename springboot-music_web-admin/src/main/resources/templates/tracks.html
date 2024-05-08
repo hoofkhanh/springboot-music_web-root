@@ -28,7 +28,6 @@
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertModal" data-whatever="@mdo">Thêm bài hát</button>
 
                         <div class="card-header py-3">
 							<div th:if="${error != null}" class="text-center">
@@ -107,80 +106,7 @@
 	<!--Logut modal-->
     <div th:replace="~{_fragments::logoutModal}"></div>
     
-    <!--Insert Modal-->
-    <div class="modal fade bd-example-modal-lg" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-lg" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Thêm bài hát</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <form method="post" th:action="@{/tracks/addTrack}" enctype="multipart/form-data">
-			  <table style="width: 100%;">
-				  <tr>
-					  <td >
-						  <div class="form-group">
-				            <label for="recipient-name" class="col-form-label">Tên bài hát:</label>
-				            <input th:if="${track != null}" th:value="${track.trackTitle}"  name="trackTitle" type="text" class="form-control" id="recipient-name" required>
-				            <input th:if="${track == null}" name="trackTitle" type="text" class="form-control" id="recipient-name" required>
-				          </div>
-				          <div class="form-group">
-				            <label for="recipient-name" class="col-form-label">File bài hát:</label>
-				            <input th:if="${fileOfTrack != null}" th:value="${fileOfTrack}" th:text="${fileOfTrack}" name="fileOfTrack" type="file" class="form-control" id="recipient-name" accept="audio/mp3,audio/*;capture=microphone"  required>
-				          	<input th:if="${fileOfTrack == null}" name="fileOfTrack" type="file" class="form-control" id="recipient-name" accept="audio/mp3,audio/*;capture=microphone"  required>
-				          </div>
-				          <div class="form-group">
-				            <label for="recipient-name" class="col-form-label">Hình ảnh bài hát:</label>
-				            <input  th:if="${imageOfTrack != null}" th:value="${imageOfTrack}" th:text="${imageOfTrack}" name="imageOfTrack" type="file" class="form-control" id="recipient-name" accept="image/png, image/gif, image/jpeg" required>
-				          	<input th:if="${imageOfTrack == null}" name="imageOfTrack" type="file" class="form-control" id="recipient-name" accept="image/png, image/gif, image/jpeg" required>
-				          </div>
-					  </td>
-					  <td style="padding-left: 20px;">
-						  <div class="form-group">
-				            <label for="recipient-name" class="col-form-label">Thể loại:</label>
-				            <select name="genre" type="text" class="form-control" id="recipient-name" required>
-								<option th:value="null">--CHỌN--</option>
-								<option th:each="genre:${genreList}" th:text="${genre.name}" th:value="${genre.id}" th:selected="${track != null && genre.id == track.genre.id}"></option>
-				            </select>
-				          </div>
-				          <div class="form-group">
-				            <label for="recipient-name" class="col-form-label">Hợp tác với (nhấn nút crlt để chọn nhiều):</label>
-				            <select name="userList[]" class="form-control" id="recipient-name" multiple required>
-								<option th:selected="${track != null && track.userList[0] == null}" value= 0 >Không Có</option>
-								<option value="artist1">Nghệ sĩ 1</option>
-						        <option value="artist2">Nghệ sĩ 2</option>
-						        <option value="artist3">nghệ sĩ 3</option>
-				            </select>
-				          </div>
-				          <div class="form-group">
-				            <label for="recipient-name" class="col-form-label">Riêng tư:</label>
-				            <label>
-								<input value= 1 name="havePrivate" type="radio" class="form-control" id="recipient-name" th:checked="${havePrivate != null && havePrivate == 1}"> Yes
-							</label>
-							<label style="margin-left: 10px;">
-								<input value= 0 name="havePrivate" type="radio" class="form-control" id="recipient-name" th:checked="${havePrivate == null || havePrivate != null && havePrivate == 0}"> No
-							</label>
-				          </div>
-					  </td>
-				  </tr>
-				  <tr>
-					  <td colspan="2">
-						  <div class="modal-footer">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tắt</button>
-					        <button type="submit" class="btn btn-primary">Thêm</button>
-					      </div>
-					  </td>
-				  </tr>
-			  </table>
-	        </form>
-	      </div>
-	      
-	    </div>
-	  </div>
-	</div>
+  
 	
 	<!-- Detail Modal-->
     <div class="modal fade bd-example-modal-lg" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

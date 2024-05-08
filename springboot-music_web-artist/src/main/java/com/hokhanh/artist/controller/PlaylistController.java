@@ -101,4 +101,10 @@ public class PlaylistController {
 	public List<Playlist> findAllPlaylistByPlaylistTitleInSearch(String playlistTitle) {
 		return this.playlistService.findAllPlaylistByPlaylistTitleInSearch(playlistTitle);
 	}
+	
+	@GetMapping("/playlists/checkPrivate")
+	@ResponseBody
+	public boolean checkPrivate(String playlistTitle) {
+		return this.playlistService.checkPrivate(playlistTitle);
+	}
 }

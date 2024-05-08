@@ -12,6 +12,7 @@
     <h1>Đăng nhập</h1>
     
     <p th:if="${param.error != null}" style="color: yellow; text-align: center; margin-top: 10px;">Sai tài khoản hoặc mật khẩu</p>
+     <p th:if="${notification != null}" style="color: yellow; text-align: center; margin-top: 10px; word-wrap: break-word; max-width: 310px;" th:text="${notification}"></p>
     
     <form th:action="@{do-login}" method="post">
 	    <div class="input-div">
@@ -45,7 +46,7 @@
     </div>
 
     <div class="button-google-facebook">
-      <button><span class="google"></span>Đăng nhập bằng Google</button>
+      <a th:href="@{/oauth2/authorization/google}"><button><span class="google"></span>Đăng nhập bằng Google</button></a>
     </div>
 
     <div class="button-google-facebook">

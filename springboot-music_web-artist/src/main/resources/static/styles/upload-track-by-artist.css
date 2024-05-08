@@ -79,3 +79,14 @@
   height: 100px;
   object-fit: cover;
 }
+
+@media(max-width: 770px) {
+	#upload-track-by-artist #trackTitleInForm, #upload-track-by-artist #userListInForm, #upload-track-by-artist #lyrics{
+		width: 174px;
+	}
+	
+	#upload-track-by-artist select{
+		width: 197px;
+	}
+}
+

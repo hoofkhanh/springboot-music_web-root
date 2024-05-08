@@ -58,6 +58,17 @@ public class UserService {
 	
 	@Autowired
 	private OtpRepository otpRepository;
+	
+	public String findByEmailForAllRole(String email) {
+		User artist = this.userRepository.findByEmail(email);
+		if(artist != null && artist.getRole().getName().equals("ADMIN")) {
+			return "ADMIN";
+		}else if(artist != null && (artist.getRole().getName().equals("ARTIST") || artist.getRole().getName().equals("ARTIST_NEXT_GEN"))) {
+			return "ARTIST";
+		}else {
+			return null;
+		}
+	}
     
 
 	public User findUserByEmail(String email) {
@@ -69,9 +80,9 @@ public class UserService {
 		}
 	}
 
-	public List<User> findAllFollowEachOtherList(Authentication authentication) {
+	public List<User> findAllFollowEachOtherList(String email) {
 //		chô này fix lại là hiện những ng đang follow qua lại vs nhau
-		User user = this.userRepository.findByEmail(authentication.getName());
+		User user = this.userRepository.findByEmail(email);
 		List<User> userList = new ArrayList<>();
 		if(user.getFollowingList() != null && user.getFollowingList().isEmpty() == false) {
 			for (Long id : user.getFollowingList()) {
@@ -346,6 +357,46 @@ public class UserService {
 		}
 		
 		
+	}
+
+	public List<User> findAllFollowingArtist(String artistName) {
+		User artist = this.userRepository.findByArtistName(artistName);
+		
+		List<User> followingArtist = new ArrayList<>();
+		
+		List<Long> followingArtistId = artist.getFollowingList();
+		if(followingArtistId != null && followingArtistId.isEmpty() == false) {
+			for (Long id : followingArtistId) {
+				followingArtist.add(this.userRepository.findById(id).get());
+			}
+		}
+		
+		return followingArtist;
+	}
+	
+	public List<User> findAllFollowerArtist(String artistName) {
+		User artist = this.userRepository.findByArtistName(artistName);
+		
+		List<User> followerArtist = new ArrayList<>();
+		
+		List<Long> followerArtistId = artist.getFollowerList();
+		if(followerArtistId != null && followerArtistId.isEmpty() == false) {
+			for (Long id : followerArtistId) {
+				followerArtist.add(this.userRepository.findById(id).get());
+			}
+		}
+		
+		return followerArtist;
+	}
+
+	public String changeProfile(User user) {
+		User checkArtistName = this.userRepository.findByArtistName(user.getArtistName());
+		if( checkArtistName != null && checkArtistName.getId() != user.getId() ) {
+			return "Đã tồn tại nghệ danh này rồi";
+		}
+		
+		this.userRepository.save(user);
+		return "Thành công";
 	}
 
 	

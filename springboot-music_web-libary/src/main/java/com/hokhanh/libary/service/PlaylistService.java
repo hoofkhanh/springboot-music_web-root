@@ -345,6 +345,11 @@ public class PlaylistService {
 		return this.playlistRepository.findAllPlaylistByPlaylistTitleInSearch(playlistTitle);
 	}
 
+	public boolean checkPrivate(String playlistTitle) {
+		Playlist playlist = this.playlistRepository.findByPlaylistTitle(playlistTitle);
+		return playlist.isPrivate();
+	}
+
 	
 	
 

@@ -43,6 +43,11 @@ public class ArtistConfiguration {
 			.defaultSuccessUrl("/index", true)
 			.permitAll()
 		)
+		.oauth2Login(oauth -> oauth
+			.loginPage("/login")
+			.defaultSuccessUrl("/login-google", true)
+			.permitAll()
+		)
 		.rememberMe(remember -> remember.tokenRepository(persistenTokenRepository()))
 		.logout(logout -> logout
 			.invalidateHttpSession(true)

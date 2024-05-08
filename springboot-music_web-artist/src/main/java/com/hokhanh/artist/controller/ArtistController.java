@@ -6,16 +6,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hokhanh.libary.model.Playlist;
 import com.hokhanh.libary.model.Track;
 import com.hokhanh.libary.model.User;
+import com.hokhanh.libary.repository.CountryRepository;
 import com.hokhanh.libary.repository.UserRepository;
 import com.hokhanh.libary.service.UserService;
+
 
 @Controller
 public class ArtistController {
@@ -24,6 +28,9 @@ public class ArtistController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private CountryRepository countryRepository;
 
 	@GetMapping("/artists/findByArtistName")
 	@ResponseBody
@@ -82,7 +89,7 @@ public class ArtistController {
 	@GetMapping("/artists/findCooperatorArtist")
 	@ResponseBody
 	public List<User>findCooperatorArtist(Authentication authentication) throws IOException {
-		return this.userService.findAllFollowEachOtherList(authentication);
+		return this.userService.findAllFollowEachOtherList(authentication.getName());
 	}
 	
 	@GetMapping("/artists/buyPackgeOfTurnOffAd")
@@ -95,6 +102,37 @@ public class ArtistController {
 	@ResponseBody
 	public int totalTrack(String artistName)  {
 		return this.userService.totalTrack(artistName);
+	}
+	
+	@GetMapping("/artists/findAllFollowingArtist")
+	@ResponseBody
+	public List<User> findAllFollowingArtist(String artistName)  {
+		return this.userService.findAllFollowingArtist(artistName);
+	}
+	
+	@GetMapping("/artists/findAllFollowerArtist")
+	@ResponseBody
+	public List<User> findAllFollowerArtist(String artistName)  {
+		return this.userService.findAllFollowerArtist(artistName);
+	}
+	
+	@GetMapping("/artists/profile")
+	public String profilePage(Model model, Authentication authentication, String notification) {
+		User user = this.userRepository.findByEmail(authentication.getName());
+		model.addAttribute("user", user);
+		model.addAttribute("countryList", this.countryRepository.findAll());
+		if(notification != null) {
+			model.addAttribute("notification", notification);
+		}
+		return "profile";
+	}
+	
+	@PostMapping("/artists/changeProfile")
+	public String changeProfile(Model model, User user, RedirectAttributes redirectAttributes) {
+		String notification = this.userService.changeProfile(user);
+		
+		redirectAttributes.addAttribute("notification", notification);
+		return "redirect:/artists/profile";
 	}
 
 }

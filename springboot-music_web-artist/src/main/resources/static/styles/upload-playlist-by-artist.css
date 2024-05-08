@@ -159,3 +159,10 @@ td a:hover{
   font-size: 14px;
 }
 
+@media(max-width: 770px) {
+	#upload-playlist-by-artist #playlistTitleInForm,#upload-playlist-by-artist #searchTrackInUploadPageOfPlaylist{
+		width: 174px;
+	}
+	
+
+}
